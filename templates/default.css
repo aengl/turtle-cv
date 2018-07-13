@@ -1,0 +1,32 @@
+body {
+  font-family: 'Exo 2', sans-serif;
+  font-size: 20px;
+  margin: 5% 10%;
+}
+
+hr {
+  border: 0;
+  height: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  margin: 1.2em 0;
+}
+
+i {
+  margin-right: 0.4em;
+}
+
+h1,
+h2 {
+  color: hsl(26, 100%, 50%);
+}
+
+h1,
+.label {
+  text-transform: uppercase;
+  margin: 0.2em 0;
+}
+
+.label {
+  color: #777;
+}

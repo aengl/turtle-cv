@@ -1,0 +1,21 @@
+doctype html
+html(lang="en")
+  head
+    title=profile.name
+    style
+      include default.css
+    link(href="https://fonts.googleapis.com/css?family=Exo+2:200" rel="stylesheet")
+    link(rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous")
+
+  body
+    // Profile
+    h1=profile.name
+    div(class="label")=profile.label
+    hr
+    div(class="description")=profile.description
+    hr
+
+    // Work history
+    h2
+      i(class="fa fa-suitcase")
+      span Work History

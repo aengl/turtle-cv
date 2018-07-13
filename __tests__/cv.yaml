@@ -1,9 +1,0 @@
-profile:
-  name: Donatello
-  label: Ninja
-  email: "donatello@tmnt.com"
-  social:
-    - network: Github
-      user: donatello
-      url: https://github.com/donatello
-
