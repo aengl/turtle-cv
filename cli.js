@@ -22,9 +22,11 @@ program
     logger.info(`Reading CV from "${cvPath}"`);
     const cv = turtle.readCV(args.yml);
 
-    const templatePath = options.template || templates.default;
+    const templatePath =
+      options.template ||
+      path.resolve(__dirname, 'templates', templates.default);
     logger.info(`Generating HTML from template at "${templatePath}"`);
-    const html = turtle.generateHTML(cv, path.join('templates', templatePath));
+    const html = turtle.generateHTML(cv, templatePath);
     const outputPath = options.output || cvPath.replace(/\.[^.]+$/, '.html');
 
     logger.info(`Saving HTML at "${outputPath}"`);
