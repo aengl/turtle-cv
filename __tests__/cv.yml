@@ -1,26 +1,65 @@
 profile:
   name: Donatello
   label: Ninja Turtle
-  email: "donatello@tmnt.com"
+  email: donatello@tmnt.com
+  website: https://www.donatello.net/
   description:
     Smartest of the four turtles. He is usually depicted wearing a purple eye mask. His primary signature weapon are his effective bō staffs. Donnie often speaks in technobabble with a natural aptitude for science and technology. He is the third oldest/second youngest of the turtles. Like all of the brothers, he is named after a Renaissance artist; in this case, he is named after Italian sculptor Donatello.
 
 social:
   - network: Github
-    user: donatello
     url: https://github.com/donatello
+  - network: Facebook
+    url: https://www.facebook.com/donatello
+  - network: Instagram
+    url: https://www.instagram.com/donatello
 
 work:
-  - company: Master Splinter Martial Arts
+  - company: TMNT
     position: Ninja
-    from: 1969
+    from: September 2001
+    summary:
+      After receiving training from Master Splinter, Donnie became part of the TMNT alongside Leonardo, Michelangelo and Raphael.
+    highlights:
+      - Ended the Foot Clan civil war
+      - Became a cyborg
+      - Ate tons of pizza
 
   - company: New York Pet Shop
     position: Pet Turtle
-    from: 1968
-    until: 1969
+    from: April 1987
+    until: September 1987
+    summary:
+      A dark year in Donnie's life, and one he rarely talks about.
 
-  - company: Nature
-    position: Wild Turtle
-    from: 1964
-    until: 1968
+education:
+  - institution: Master Splinter's School of Martial Arts
+    area: Ninjutsu
+    degree: MNi (Master of Ninja)
+    from: 1994
+    until: September 2001
+
+skills:
+  - name: Ninjitsu
+    level: Master
+    keywords:
+      - Kicking
+      - Punching
+      - Biting
+
+  - name: Bō staffs
+    level: Legendary
+    keywords:
+      - Swinging
+      - Hitting
+
+  - name: Pizza
+    level: Advanced
+
+languages:
+  - name: Turtle
+    fluency: Native language
+  - name: English
+    fluency: Full professional proficiency
+  - name: Italian
+    fluency: Limited professional proficiency

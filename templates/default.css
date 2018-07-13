@@ -1,7 +1,19 @@
-body {
+:root {
+  --theme-color: hsl(26, 100%, 50%);
+  --light-color: #999;
+}
+
+html {
+  display: flex;
+  justify-content: center;
   font-family: 'Exo 2', sans-serif;
   font-size: 20px;
+  font-weight: 200;
   margin: 5% 10%;
+}
+
+body {
+  max-width: 800px;
 }
 
 hr {
@@ -16,17 +28,97 @@ i {
   margin-right: 0.4em;
 }
 
+h1 {
+  margin: 0;
+}
+
+h2 {
+  margin: 1.7em 0 0.7em;
+}
+
 h1,
 h2 {
-  color: hsl(26, 100%, 50%);
-}
-
-h1,
-.label {
+  color: var(--theme-color);
   text-transform: uppercase;
-  margin: 0.2em 0;
+  font-weight: 200;
 }
 
-.label {
-  color: #777;
+a {
+  text-decoration: none;
+  color: black;
+}
+
+a:hover {
+  color: var(--theme-color);
+}
+
+ul {
+  padding-left: 25px;
+  margin: 0.4em 0;
+}
+
+/* Common */
+.item {
+  margin: 1.2em 0;
+}
+.dates {
+  color: var(--light-color);
+}
+.item {
+  font-size: 0.8em;
+}
+
+/* Profile */
+.profile .label {
+  margin: 0.2em 0;
+  text-transform: uppercase;
+  color: var(--light-color);
+}
+.profile .description {
+  text-align: justify;
+}
+.profile .summary {
+  margin-top: 1em;
+  font-size: 80%;
+}
+
+/* Social */
+.social {
+  margin: 1.2rem 0;
+  font-size: 3em;
+}
+.social i {
+  color: var(--light-color);
+  transition: all 0.4s ease;
+}
+.social i:hover {
+  color: var(--theme-color);
+  transform: scale(1.2);
+}
+
+/* Work, Education & Skills */
+.work .company,
+.education .institution,
+.skills .name {
+  font-size: 1rem;
+  font-weight: 400;
+  margin: 0.4em 0;
+}
+.work .highlights {
+  margin: 0.4em 0 0 0;
+}
+.skills .level {
+  color: var(--light-color);
+}
+
+/* Languages */
+.languages li {
+  margin-bottom: 0.4em;
+}
+.languages .name {
+  font-weight: 400;
+}
+.languages .fluency {
+  font-size: 80%;
+  color: var(--light-color);
 }

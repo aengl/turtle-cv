@@ -1,21 +1,104 @@
+mixin section(text, icon)
+  h2
+    i(class=icon)
+    span=text
+
+mixin dates(obj)
+  if obj.until
+    div(class='dates')=`${obj.from} to ${obj.until}`
+  else
+    div(class='dates')=`Since ${obj.from}`
+
+mixin req(obj, name)
+  div(class=name)=obj[name]
+
+mixin opt(obj, name)
+  if obj[name]
+    div(class=name)=obj[name]
+
+mixin social(obj, network, icon)
+  if obj.network == network
+    a(href=obj.url)
+      i(class=icon)
+
 doctype html
-html(lang="en")
+html(lang='en')
   head
     title=profile.name
     style
       include default.css
-    link(href="https://fonts.googleapis.com/css?family=Exo+2:200" rel="stylesheet")
-    link(rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous")
+    link(href='https://fonts.googleapis.com/css?family=Exo+2:200,400' rel='stylesheet')
+    link(rel='stylesheet' href='https://use.fontawesome.com/releases/v5.1.0/css/all.css' integrity='sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt' crossorigin='anonymous')
+    meta(name='viewport' content='width=device-width, initial-scale=1')
 
   body
-    // Profile
-    h1=profile.name
-    div(class="label")=profile.label
-    hr
-    div(class="description")=profile.description
-    hr
+    // Profile & Social
+    div(class='profile')
+      h1=profile.name
+      +opt(profile, 'label')
 
-    // Work history
-    h2
-      i(class="fa fa-suitcase")
-      span Work History
+      div(class='summary')
+        if profile.email
+          div
+            i(class='fa fa-envelope')
+            a(href=`mailto:${profile.email}`)=profile.email
+        if profile.website
+          div
+            i(class='fa fa-globe')
+            a(href=`mailto:${profile.website}`)=profile.website
+
+      div(class='social')
+        each item in social
+          +social(item, 'Facebook', 'fab fa-facebook')
+          +social(item, 'Github', 'fab fa-github')
+          +social(item, 'Instagram', 'fab fa-instagram')
+
+      hr
+      div(class='description')=profile.description
+      hr
+
+    // Work
+    div(class='work')
+      +section('Work History', 'fa fa-suitcase')
+      each item in work
+        div(class='item')
+          +dates(item)
+          +req(item, 'company')
+          +opt(item, 'position')
+          +opt(item, 'summary')
+          if item.highlights
+            ul(class='highlights')
+              each highlight in item.highlights
+                li(class='highlight')=highlight
+
+    // Education
+    div(class='education')
+      +section('Education', 'fa fa-graduation-cap')
+      each item in education
+        div(class='item')
+          +dates(item)
+          +opt(item, 'institution')
+          +opt(item, 'area')
+          if item.degree
+            div(class='degree')=`Degree: ${item.degree}`
+
+    // Skills
+    div(class='skills')
+      +section('Skills', 'fa fa-toolbox')
+      each item in skills
+        div(class='item')
+          +req(item, 'name')
+          +opt(item, 'level')
+          if item.keywords
+            ul(class='keywords')
+              each word in item.keywords
+                li=word
+
+    // Languages
+    div(class='languages')
+      +section('Languages', 'fa fa-comments')
+      ul
+        each item in languages
+          li
+            +req(item, 'name')
+            +opt(item, 'fluency')
