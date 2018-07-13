@@ -1,7 +1,10 @@
+@import url('https://fonts.googleapis.com/css?family=Exo+2:200|Merriweather:300,400');
+
 :root {
   --theme-color: hsl(26, 100%, 50%);
   --light-color: #999;
   --small-font: 0.8em;
+  --weight-bold: 500;
 }
 
 html {
@@ -112,7 +115,7 @@ ul {
 .skills .name,
 .languages .name {
   font-size: 1rem;
-  font-weight: 500;
+  font-weight: var(--weight-bold);
   margin: 0.4em 0;
 }
 .work .highlights {
