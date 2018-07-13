@@ -34,11 +34,11 @@ html(lang='en')
 
   body
     // Profile & Social
-    div(class='profile')
+    .profile
       h1=profile.name
       +opt(profile, 'label')
 
-      div(class='summary')
+      .summary
         if profile.email
           div
             i(class='fa fa-envelope')
@@ -48,8 +48,8 @@ html(lang='en')
             i(class='fa fa-globe')
             a(href=`mailto:${profile.website}`)=profile.website
 
-      .social
-        if social
+      if social
+        .social
           each item in social
             +social(item, 'Facebook', 'fab fa-facebook')
             +social(item, 'GitHub', 'fab fa-github')
@@ -62,47 +62,51 @@ html(lang='en')
       hr
 
     // Work
-    .work
-      +section('Work History', 'fa fa-suitcase')
-      each item in work
-        div(class='item')
-          +dates(item)
-          +req(item, 'company')
-          +opt(item, 'position')
-          +opt(item, 'summary')
-          if item.highlights
-            ul(class='highlights')
-              each highlight in item.highlights
-                li(class='highlight')=highlight
+    if work
+      .work
+        +section('Work History', 'fa fa-suitcase')
+        each item in work
+          div(class='item')
+            +dates(item)
+            +req(item, 'company')
+            +opt(item, 'position')
+            +opt(item, 'summary')
+            if item.highlights
+              ul(class='highlights')
+                each highlight in item.highlights
+                  li(class='highlight')=highlight
 
     // Education
-    .education
-      +section('Education', 'fa fa-graduation-cap')
-      each item in education
-        .item
-          +dates(item)
-          +opt(item, 'institution')
-          +opt(item, 'area')
-          if item.degree
-            div(class='degree')=`Degree: ${item.degree}`
+    if education
+      .education
+        +section('Education', 'fa fa-graduation-cap')
+        each item in education
+          .item
+            +dates(item)
+            +opt(item, 'institution')
+            +opt(item, 'area')
+            if item.degree
+              div(class='degree')=`Degree: ${item.degree}`
 
     // Skills
-    .skills
-      +section('Skills', 'fa fa-toolbox')
-      each item in skills
-        .item
-          +req(item, 'name')
-          +opt(item, 'level')
-          if item.keywords
-            ul(class='keywords')
-              each word in item.keywords
-                li=word
+    if skills
+      .skills
+        +section('Skills', 'fa fa-toolbox')
+        each item in skills
+          .item
+            +req(item, 'name')
+            +opt(item, 'level')
+            if item.keywords
+              ul(class='keywords')
+                each word in item.keywords
+                  li=word
 
     // Languages
-    .languages
-      +section('Languages', 'fa fa-comments')
-      ul
-        each item in languages
-          li
-            +req(item, 'name')
-            +opt(item, 'fluency')
+    if languages
+      .languages
+        +section('Languages', 'fa fa-comments')
+        ul
+          each item in languages
+            li
+              +req(item, 'name')
+              +opt(item, 'fluency')
