@@ -29,3 +29,25 @@ npx https://github.com/aengl/turtle-cv cv.yml
 Just make sure that your `cv.yml` actually exists. Turtle magic isn't _that_ powerful.
 
 You should now be the proud owner of a `cv.html`. Go and host it on [GitHub pages](https://pages.github.com/) and you're good to go!
+
+One more useful hint:
+
+Especially when using `npx`, it's very helpful to enable watch mode, which will automatically compile the HTML file whenever you change and save the YAML file.
+
+```
+npx https://github.com/aengl/turtle-cv cv.yml --watch
+```
+
+## Installation
+
+If you find yourself using `npx` a lot, it probably makes more sense to install the project. Simply run:
+
+```
+npm install --global https://github.com/aengl/turtle-cv
+```
+
+You can now convert the yml simply by typing:
+
+```
+turtle-cv cv.yml
+```
