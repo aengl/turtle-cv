@@ -1,0 +1,6 @@
+{
+  "watch": ["cli.js", "src", "__tests__"],
+  "ignore": ["*.test.*"],
+  "ext": "yml,json",
+  "exec": "node cli.js"
+}

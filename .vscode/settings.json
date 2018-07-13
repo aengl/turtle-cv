@@ -1,0 +1,11 @@
+{
+  "prettier.singleQuote": true,
+  "prettier.trailingComma": "es5",
+  "editor.rulers": [80],
+  "editor.formatOnSave": true,
+  "editor.tabSize": 2,
+  "files.exclude": {
+    "bin/": true,
+    "build/": true
+  }
+}
