@@ -26,6 +26,7 @@
   "dependencies": {
     "caporal": "0.10.0",
     "js-yaml": "3.12.0",
+    "markdown": "0.5.0",
     "pug": "2.0.3"
   },
   "devDependencies": {
@@ -33,7 +34,7 @@
     "eslint-config-airbnb-base": "13.0.0",
     "eslint-config-prettier": "2.9.0",
     "eslint-plugin-import": "2.13.0",
-    "prettier": "1.13.7",
-    "nodemon": "1.18.1"
+    "nodemon": "1.18.1",
+    "prettier": "1.13.7"
   }
 }

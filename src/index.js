@@ -1,6 +1,7 @@
 const fs = require('fs');
 const pug = require('pug');
 const yaml = require('js-yaml');
+const { markdown } = require('markdown');
 
 module.exports = {
   /**
@@ -16,5 +17,9 @@ module.exports = {
    * @param {string} templatePath Path to a Pug template.
    * @returns {string} The rendered HTML page.
    */
-  generateHTML: (cv, templatePath) => pug.renderFile(templatePath, cv),
+  generateHTML: (cv, templatePath) =>
+    pug.renderFile(templatePath, {
+      ...cv,
+      markdown: s => markdown.toHTML(s),
+    }),
 };
