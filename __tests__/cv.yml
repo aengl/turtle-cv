@@ -12,7 +12,9 @@ social:
   - network: Facebook
     url: https://www.facebook.com/donatello
   - network: Instagram
-    url: https://www.instagram.com/donatello
+    url: https://www.linkedin.com/donatello
+  - network: LinkedIn
+    url: https://www.linkedin.com/in/donatello
 
 work:
   - company: TMNT

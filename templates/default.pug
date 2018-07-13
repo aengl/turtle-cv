@@ -27,7 +27,7 @@ html(lang='en')
     title=profile.name
     style
       include default.css
-    link(href='https://fonts.googleapis.com/css?family=Exo+2:200,400' rel='stylesheet')
+    link(href='https://fonts.googleapis.com/css?family=Exo+2:200|Merriweather:300,500' rel='stylesheet')
     link(rel='stylesheet' href='https://use.fontawesome.com/releases/v5.1.0/css/all.css' integrity='sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt' crossorigin='anonymous')
     meta(name='viewport' content='width=device-width, initial-scale=1')
 
@@ -48,10 +48,12 @@ html(lang='en')
             a(href=`mailto:${profile.website}`)=profile.website
 
       div(class='social')
-        each item in social
-          +social(item, 'Facebook', 'fab fa-facebook')
-          +social(item, 'GitHub', 'fab fa-github')
-          +social(item, 'Instagram', 'fab fa-instagram')
+        if social
+          each item in social
+            +social(item, 'Facebook', 'fab fa-facebook')
+            +social(item, 'GitHub', 'fab fa-github')
+            +social(item, 'Instagram', 'fab fa-instagram')
+            +social(item, 'LinkedIn', 'fab fa-linkedin')
 
       hr
       div(class='description')=profile.description

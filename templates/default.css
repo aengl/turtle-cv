@@ -1,15 +1,17 @@
 :root {
   --theme-color: hsl(26, 100%, 50%);
   --light-color: #999;
+  --small-font: 0.8em;
 }
 
 html {
   display: flex;
   justify-content: center;
-  font-family: 'Exo 2', sans-serif;
+  font-family: 'Merriweather', sans-serif;
   font-size: 20px;
-  font-weight: 200;
-  margin: 5% 10%;
+  font-weight: 300;
+  line-height: 1.2em;
+  margin: 5vh 10vw;
 }
 
 body {
@@ -29,11 +31,13 @@ i {
 }
 
 h1 {
-  margin: 0;
+  margin: 0.4em 0;
+  font-size: 2.4em;
 }
 
 h2 {
-  margin: 1.7em 0 0.7em;
+  margin: 2em 0 1.2em;
+  font-size: 1.6em;
 }
 
 h1,
@@ -41,6 +45,7 @@ h2 {
   color: var(--theme-color);
   text-transform: uppercase;
   font-weight: 200;
+  font-family: 'Exo 2', sans-serif;
 }
 
 a {
@@ -59,7 +64,7 @@ ul {
 
 /* Common */
 .item {
-  margin: 1.2em 0;
+  margin: 2.4em 0;
 }
 .dates {
   color: var(--light-color);
@@ -76,10 +81,15 @@ ul {
 }
 .profile .description {
   text-align: justify;
+  margin: 2.2em 0;
+  font-size: var(--small-font);
 }
 .profile .summary {
-  margin-top: 1em;
-  font-size: 80%;
+  margin: 1.8em 0;
+  font-size: var(--small-font);
+}
+.profile .summary > * {
+  margin: 0.2em 0;
 }
 
 /* Social */
@@ -96,12 +106,13 @@ ul {
   transform: scale(1.2);
 }
 
-/* Work, Education & Skills */
+/* Work, Education, Skills & Languages */
 .work .company,
 .education .institution,
-.skills .name {
+.skills .name,
+.languages .name {
   font-size: 1rem;
-  font-weight: 400;
+  font-weight: 500;
   margin: 0.4em 0;
 }
 .work .highlights {
@@ -110,15 +121,10 @@ ul {
 .skills .level {
   color: var(--light-color);
 }
-
-/* Languages */
 .languages li {
   margin-bottom: 0.4em;
 }
-.languages .name {
-  font-weight: 400;
-}
 .languages .fluency {
-  font-size: 80%;
+  font-size: var(--small-font);
   color: var(--light-color);
 }
