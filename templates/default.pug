@@ -41,7 +41,11 @@ html(lang='en')
         if profile.website
           div
             i.fa.fa-globe
-            a(href=`mailto:${profile.website}`)=profile.website
+            a(href=profile.website)=profile.website
+        if profile.location
+          div
+            i.fa.fa-home
+            span=profile.location
 
       if social
         .social
