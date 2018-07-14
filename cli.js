@@ -2,10 +2,9 @@
 
 const cluster = require('cluster');
 const fs = require('fs');
-const path = require('path');
 const program = require('caporal');
 const packageJson = require('./package.json');
-const turtle = require('./src');
+const { generateHTML, readCV } = require('./src');
 const { readPath, resolveTemplate, resolveYML } = require('./src/resolve');
 
 function forkAndWatch(file, logger) {
@@ -37,11 +36,11 @@ program
     } else {
       const cvPath = resolveYML(args.yml, null, '.yml');
       logger.info(`Reading CV from "${cvPath}"`);
-      const cv = turtle.readCV(readPath(args.yml));
+      const cv = readCV(readPath(args.yml));
 
       const templatePath = resolveTemplate(options.template || 'default');
       logger.info(`Generating HTML from template at "${templatePath}"`);
-      const html = turtle.generateHTML(cv, templatePath);
+      const html = generateHTML(cv, templatePath);
       const outputPath = options.output || cvPath.replace(/\.[^.]+$/, '.html');
 
       logger.info(`Saving HTML at "${outputPath}"`);

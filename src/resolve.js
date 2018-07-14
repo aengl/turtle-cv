@@ -14,7 +14,6 @@ module.exports = {
    * @param {string} uri The URI (relative or absolute path) for the Pug
    * template.
    * @returns {string} Resolved path to the template.
-   *
    */
   resolveTemplate: uri => {
     const templateRoot = path.join(__dirname, '../themes');

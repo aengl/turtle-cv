@@ -20,8 +20,9 @@
     "node": ">=10"
   },
   "scripts": {
+    "start": "node cli.js",
     "dev": "nodemon",
-    "start": "node cli.js"
+    "test": "ava"
   },
   "dependencies": {
     "caporal": "0.10.0",
@@ -30,6 +31,7 @@
     "pug": "2.0.3"
   },
   "devDependencies": {
+    "ava": "0.25.0",
     "eslint": "5.1.0",
     "eslint-config-airbnb-base": "13.0.0",
     "eslint-config-prettier": "2.9.0",
