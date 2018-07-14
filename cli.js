@@ -6,7 +6,7 @@ const path = require('path');
 const program = require('caporal');
 const packageJson = require('./package.json');
 const turtle = require('./src');
-const { resolvePath, readPath } = require('./src/resolve');
+const { readPath, resolveTemplate, resolveYML } = require('./src/resolve');
 
 function forkAndWatch(file, logger) {
   if (!fs.existsSync(file)) {
@@ -35,15 +35,11 @@ program
       logger.info('starting in watch mode');
       forkAndWatch(args.yml, logger);
     } else {
-      const cvPath = resolvePath(args.yml, null, '.yml');
+      const cvPath = resolveYML(args.yml, null, '.yml');
       logger.info(`Reading CV from "${cvPath}"`);
       const cv = turtle.readCV(readPath(args.yml));
 
-      const templatePath = resolvePath(
-        options.template || 'default',
-        path.join(__dirname, 'templates'),
-        '.pug'
-      );
+      const templatePath = resolveTemplate(options.template || 'default');
       logger.info(`Generating HTML from template at "${templatePath}"`);
       const html = turtle.generateHTML(cv, templatePath);
       const outputPath = options.output || cvPath.replace(/\.[^.]+$/, '.html');

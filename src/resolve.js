@@ -3,23 +3,39 @@ const path = require('path');
 
 module.exports = {
   /**
-   * Resolves a relative or absolute path, adding an extension if necessary.
-   * @param {string} uri The URI (relative/absolute path or URL).
-   * @param {string} root Path to the root that is used to resolve relative
-   * paths.
-   * @param {string} extension Force this extension on path URIs. Specify the
-   * full extension, including the dot.
-   * @returns {string} Resolved URI.
+   * Resolves the absolute path to a YML file.
+   * @param {string} uri The URI (relative or absolute path) for the YML file.
+   * @returns {string} Resolved path to the YML file.
    */
-  resolvePath: (uri, root, extension) => {
-    if (path.isAbsolute(uri)) {
-      return uri;
+  resolveYML: uri => path.resolve(uri),
+
+  /**
+   * Resolves the absolute path to a Pug template.
+   * @param {string} uri The URI (relative or absolute path) for the Pug
+   * template.
+   * @returns {string} Resolved path to the template.
+   *
+   */
+  resolveTemplate: uri => {
+    const templateRoot = path.join(__dirname, '../themes');
+
+    // Find something that actually exists first
+    let existingUri = uri;
+    if (!fs.existsSync(existingUri)) {
+      existingUri = path.join(templateRoot, uri);
     }
-    const resolvedPath = root ? path.resolve(root, uri) : path.resolve(uri);
-    return path.extname(resolvedPath)
-      ? resolvedPath
-      : `${resolvedPath}${extension}`;
+    if (!fs.existsSync(existingUri)) {
+      throw new Error(`Error: theme not found: "${uri}"`);
+    }
+
+    // Figure out the path to the Pug file
+    const stats = fs.lstatSync(existingUri);
+    if (stats.isDirectory) {
+      return path.resolve(path.join(existingUri, 'theme.pug'));
+    }
+    return existingUri;
   },
+
   /**
    * Reads the contents of a file.
    * @param {string} filePath Path to the file to read.
