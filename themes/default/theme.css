@@ -74,6 +74,7 @@ ul {
 .item {
   margin: 2.4em 0;
 }
+.date,
 .dates {
   color: var(--light-color);
 }
@@ -87,16 +88,16 @@ ul {
   text-transform: uppercase;
   color: var(--light-color);
 }
-.profile .description {
+.profile .summary {
   text-align: justify;
   margin: 2.2em 0;
   font-size: var(--small-font);
 }
-.profile .summary {
+.profile .details {
   margin: 1.8em 0;
   font-size: var(--small-font);
 }
-.profile .summary > * {
+.profile .details > * {
   margin: 0.2em 0;
 }
 
@@ -114,9 +115,11 @@ ul {
   transform: scale(1.2);
 }
 
-/* Work, Education, Skills & Languages */
+/* Other sections */
 .work .company,
 .education .institution,
+.awards .name,
+.publications .title,
 .skills .name,
 .languages .name {
   font-size: 1rem;
@@ -132,7 +135,7 @@ ul {
 .languages li {
   margin-bottom: 0.4em;
 }
-.languages .fluency {
+.languages .level {
   font-size: var(--small-font);
   color: var(--light-color);
 }

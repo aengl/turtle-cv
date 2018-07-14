@@ -70,7 +70,7 @@ wget https://raw.githubusercontent.com/aengl/turtle-cv/master/__tests__/cv.yml
 
 ## Usage
 
-You can generate the CV without even checking out this project. It's ancient turtle magic ✨🐢✨! Just run the following in your terminal:
+You can generate the CV without even cloning this project. It's ancient turtle magic ✨🐢✨! Just run the following in your terminal:
 
 ```
 npx https://github.com/aengl/turtle-cv cv.yml

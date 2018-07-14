@@ -8,7 +8,7 @@ module.exports = {
    * @param {string} cv Contents of the CV YAML file.
    * @returns {object} CV data object.
    */
-  readCV: cv => yaml.load(cv),
+  parseCV: cv => yaml.load(cv),
 
   /**
    * Generates an HTML file from a template and a CV data object.
