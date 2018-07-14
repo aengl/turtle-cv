@@ -1,0 +1,5 @@
+{
+  "watch": ["themes", "gallery"],
+  "ext": "js,pug,css",
+  "exec": "node gallery/create.js"
+}

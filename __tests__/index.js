@@ -3,7 +3,7 @@ const fs = require('fs');
 const { generateHTML, readCV } = require('../src');
 const { readPath, resolveTemplate, resolveYML } = require('../src/resolve');
 
-process.chdir('__tests__');
+process.chdir(__dirname);
 
 const cv = readCV(readPath(resolveYML('cv.yml')));
 const themes = fs.readdirSync('../themes');

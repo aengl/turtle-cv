@@ -21,7 +21,9 @@
   },
   "scripts": {
     "start": "node cli.js",
+    "create:gallery": "node gallery/create.js",
     "dev": "nodemon",
+    "dev:gallery": "nodemon --config nodemon.gallery.json",
     "test": "ava"
   },
   "dependencies": {

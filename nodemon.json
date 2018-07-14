@@ -1,6 +1,5 @@
 {
-  "watch": ["cli.js", "src", "templates", "__tests__"],
-  "ignore": ["*.test.*"],
+  "watch": ["cli.js", "src", "themes", "__tests__"],
   "ext": "js,yml,pug,css",
   "exec": "node cli.js"
 }

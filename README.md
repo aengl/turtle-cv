@@ -50,6 +50,8 @@ into
 
 ![Default theme](https://aengl.github.io/static/turtle-cv/default.png)
 
+You can browse all available themes in the [🌠 Theme Gallery](https://aengl.github.io/turtle-cv/gallery).
+
 ## Prerequisites
 
 This project requires a recent version of [nodejs](https://nodejs.org/en/) installed. Everything >= 8 should work, but only the latest version is tested.
@@ -115,6 +117,8 @@ Or using `npx`:
 ```
 npx https://github.com/aengl/turtle-cv cv.yml -t dark
 ```
+
+You can browse all available themes in the [🌠 Theme Gallery](https://aengl.github.io/turtle-cv/gallery).
 
 If you want to write your own theme, or make a simple adjustment to an existing one, the best way to start is to download it from the [themes folder](themes). If the theme extends another theme (the Pug file starts with an `extends` directive) you will have to download that theme as well and put it in a sibling folder.
 
