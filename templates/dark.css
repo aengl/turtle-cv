@@ -1,0 +1,6 @@
+:root {
+  --background: hsl(26, 10%, 11%);
+  --text-color: hsl(26, 10%, 85%);
+  --theme-color: hsl(26, 100%, 50%);
+  --light-color: hsl(26, 10%, 30%);
+}
