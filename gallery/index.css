@@ -1,0 +1,39 @@
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  font-size: 26px;
+  font-family: Avenir, 'Segoe UI', sans-serif;
+  margin: 0;
+}
+
+#themes {
+  margin: 0.2em;
+  padding: 0;
+  overflow-y: scroll;
+}
+
+#themes li {
+  cursor: pointer;
+  list-style: none;
+  padding: 0.2em 0.4em;
+}
+
+#themes li:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+#preview {
+  flex-grow: 1;
+  border: 1px solid black;
+  margin: 0.2em;
+}
+
+.selected {
+  background-color: orange;
+  border-radius: 5px;
+}

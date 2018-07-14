@@ -1,0 +1,113 @@
+mixin section(text, icon)
+  h2
+    i(class=icon)
+    span=text
+
+mixin field(obj, name, prefix)
+  if obj[name]
+    div(class=name)=`${prefix || ''}${obj[name]}`
+
+mixin dates(obj)
+  if obj.until
+    .dates=`${obj.from} to ${obj.until}`
+  else
+    .dates=`Since ${obj.from}`
+
+mixin social(obj, network, icon)
+  if obj.network == network
+    a(href=obj.url)
+      i(class=icon)
+
+doctype html
+html(lang='en')
+  block head
+    head
+      title=profile.name
+      block css
+        style
+          include theme.css
+      block icons
+        link(rel='stylesheet' href='https://use.fontawesome.com/releases/v5.1.0/css/all.css' integrity='sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt' crossorigin='anonymous')
+      meta(charset='utf-8')
+      meta(name='viewport' content='width=device-width, initial-scale=1')
+
+  body
+    block profile
+      .profile
+        h1=profile.name
+        +field(profile, 'label')
+
+        .summary
+          if profile.email
+            div
+              i.fa.fa-envelope
+              a(href=`mailto:${profile.email}`)=profile.email
+          if profile.website
+            div
+              i.fa.fa-globe
+              a(href=profile.website)=profile.website
+          if profile.location
+            div
+              i.fa.fa-home
+              span=profile.location
+
+        if social
+          .social
+            each item in social
+              +social(item, 'Facebook', 'fab fa-facebook')
+              +social(item, 'GitHub', 'fab fa-github')
+              +social(item, 'Instagram', 'fab fa-instagram')
+              +social(item, 'LinkedIn', 'fab fa-linkedin')
+
+        hr
+        .description!=markdown(profile.description)
+        hr
+
+    if work
+      block work
+        .work
+          +section('Work History', 'fa fa-suitcase')
+          each item in work
+            .item
+              +dates(item)
+              +field(item, 'company')
+              +field(item, 'position', 'Position: ')
+              +field(item, 'summary')
+              if item.highlights
+                ul.highlights
+                  each highlight in item.highlights
+                    li.highlight=highlight
+
+    if education
+      block education
+        .education
+          +section('Education', 'fa fa-graduation-cap')
+          each item in education
+            .item
+              +dates(item)
+              +field(item, 'institution')
+              +field(item, 'area')
+              +field(item, 'degree', 'Degree: ')
+
+    if skills
+      block skills
+        .skills
+          +section('Skills', 'fa fa-toolbox')
+          each item in skills
+            .item
+              +field(item, 'name')
+              +field(item, 'level')
+              if item.keywords
+                ul.keywords
+                  each word in item.keywords
+                    li=word
+
+    if languages
+      block languages
+        .languages
+          +section('Languages', 'fa fa-comments')
+          ul
+            each item in languages
+              li
+                +field(item, 'name')
+                +field(item, 'fluency')
