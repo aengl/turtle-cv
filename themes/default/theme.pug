@@ -1,19 +1,12 @@
-mixin section(text, icon)
-  h2
-    i(class=icon)
-    span=text
+include ../common.pug
 
-mixin field(item, attr, prefix)
-  if item && item[attr]
-    div(class=attr)=`${prefix || ''}${item[attr]}`
-
-mixin url(item, attr, url)
-  if item && item[attr]
-    if item.url
-      a(href=item.url)
-        div(class=attr)=item[attr]
-    else
-      div(class=attr)=item[attr]
+mixin section(name, text, icon)
+  if locals[name]
+    .div(class=name)
+      h2
+        i(class=icon)
+        span=text
+      block
 
 mixin dates(item)
   if item
@@ -21,11 +14,6 @@ mixin dates(item)
       .dates=`${item.from} to ${item.until}`
     else
       .dates=`Since ${item.from}`
-
-mixin social(item, network, icon)
-  if item && item.network == network
-    a(href=item.url)
-      i(class=icon)
 
 doctype html
 html(lang='en')
@@ -44,108 +32,97 @@ html(lang='en')
     block profile
       .profile
         h1=profile.name
-        +field(profile, 'label')
+        +attribute(profile, 'label')
 
         .details
-          if profile.email
-            div
-              i.fa.fa-envelope
-              a(href=`mailto:${profile.email}`)=profile.email
-          if profile.website
-            div
-              i.fa.fa-globe
-              a(href=profile.website)=profile.website
-          if profile.location
-            div
-              i.fa.fa-home
-              span=profile.location
+          +attribute(profile, 'email')
+            i.fa.fa-envelope
+            a(href=`mailto:${profile.email}`)=profile.email
+          +attribute(profile, 'website')
+            i.fa.fa-globe
+            a(href=profile.website)=profile.website
+          +attribute(profile, 'location')
+            i.fa.fa-home
+            span=profile.location
 
         if social
           .social
             each item in social
               if item
-                +social(item, 'Facebook', 'fab fa-facebook')
-                +social(item, 'GitHub', 'fab fa-github')
-                +social(item, 'Instagram', 'fab fa-instagram')
-                +social(item, 'LinkedIn', 'fab fa-linkedin')
+                +network(item, 'facebook')
+                  i.fab.fa-facebook
+                +network(item, 'github')
+                  i.fab.fa-github
+                +network(item, 'instagram')
+                  i.fab.fa-instagram
+                +network(item, 'linkedin')
+                  i.fab.fa-linkedin
 
         if profile.summary
           hr
-          .summary!=markdown(profile.summary)
+          +summary
           hr
 
-    if work
-      block work
-        .work
-          +section('Work History', 'fa fa-suitcase')
-          each item in work
-            if item
-              .item
-                +dates(item)
-                +url(item, 'company')
-                +field(item, 'position', 'Position: ')
-                +field(item, 'summary')
-                if item.highlights
-                  ul.highlights
-                    each highlight in item.highlights
-                      li.highlight=highlight
+    block work
+      +section('work', 'Work History', 'fa fa-suitcase')
+        each item in work
+          if item
+            .item
+              +dates(item)
+              +url(item, 'company')
+              +attribute(item, 'position', 'Position: ')
+              +attribute(item, 'summary')
+              if item.highlights
+                ul.highlights
+                  each highlight in item.highlights
+                    li.highlight=highlight
 
-    if education
-      block education
-        .education
-          +section('Education', 'fa fa-graduation-cap')
-          each item in education
-            if item
-              .item
-                +dates(item)
-                +url(item, 'institution')
-                +field(item, 'area')
-                +field(item, 'degree', 'Degree: ')
+    block education
+      +section('education', 'Education', 'fa fa-graduation-cap')
+        each item in education
+          if item
+            .item
+              +dates(item)
+              +url(item, 'institution')
+              +attribute(item, 'area')
+              +attribute(item, 'degree', 'Degree: ')
 
-    if awards
-      block awards
-        .awards
-          +section('Awards', 'fa fa-medal')
-          each item in awards
-            if item
-              .item
-                +field(item, 'date')
-                +url(item, 'name')
-                +field(item, 'awarder', 'Awarded by: ')
-                +field(item, 'summary')
+    block awards
+      +section('awards', 'Awards', 'fa fa-medal')
+        each item in awards
+          if item
+            .item
+              +attribute(item, 'date')
+              +url(item, 'name')
+              +attribute(item, 'awarder', 'Awarded by: ')
+              +attribute(item, 'summary')
 
-    if publications
-      block publications
-        .publications
-          +section('Publications', 'fa fa-pen-fancy')
-          each item in publications
-            if item
-              .item
-                +field(item, 'date')
-                +url(item, 'title')
-                +field(item, 'summary')
+    block publications
+      +section('publications', 'Publications', 'fa fa-pen-fancy')
+        each item in publications
+          if item
+            .item
+              +attribute(item, 'date')
+              +url(item, 'title')
+              +attribute(item, 'summary')
 
-    if skills
-      block skills
-        .skills
-          +section('Skills', 'fa fa-toolbox')
-          each item in skills
-            if item
-              .item
-                +field(item, 'name')
-                +field(item, 'level')
-                if item.keywords
-                  ul.keywords
-                    each word in item.keywords
-                      li=word
+    block skills
+      +section('skills', 'Skills', 'fa fa-toolbox')
+        each item in skills
+          if item
+            .item
+              +attribute(item, 'name')
+              +attribute(item, 'level')
+              if item.keywords
+                ul.keywords
+                  each word in item.keywords
+                    li=word
 
-    if languages
-      block languages
-        .languages
-          +section('Languages', 'fa fa-comments')
-          ul
-            each item in languages
-              if item
-                li
-                  +field(item, 'name')
-                  +field(item, 'level')
+    block languages
+      +section('languages', 'Languages', 'fa fa-comments')
+        ul
+          each item in languages
+            if item
+              li
+                +attribute(item, 'name')
+                +attribute(item, 'level')

@@ -1,0 +1,32 @@
+//- Helper for showing an item's attribute value in a div
+mixin attribute(item, attr, prefix)
+  if item && item[attr]
+    if block
+      div(class=attr)
+        block
+    else
+      div(class=attr)=`${prefix || ''}${item[attr]}`
+
+//- Same as +attribute, but the div also becomes the anchor for the item's url
+mixin url(item, attr, prefix)
+  if item && item[attr]
+    if item.url
+      div(class=attr)
+        if block
+          a(href=item.url)
+            block
+        else
+          a(href=item.url)=`${prefix || ''}${item[attr]}`
+    else
+      +attribute(item, attr, prefix)
+
+//- Shows a block if the item has the specified social network defined
+mixin network(item, network)
+  if item && item.network.toLowerCase() == network
+    a(href=item.url)
+      block
+
+//- Shows the profile summary
+mixin summary()
+  if profile.summary
+    .summary!=markdown(profile.summary)
