@@ -1,3 +1,10 @@
 {
-  "recommendations": ["esbenp.prettier-vscode", "stkb.rewrap"]
+  "recommendations": [
+    "alanwalk.markdown-toc",
+    "bierner.markdown-preview-github-styles",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "redhat.vscode-yaml",
+    "stkb.rewrap"
+  ]
 }

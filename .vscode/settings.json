@@ -7,5 +7,9 @@
   "files.exclude": {
     "bin/": true,
     "build/": true
+  },
+  "yaml.validate": true,
+  "yaml.schemas": {
+    "http://localhost:31337/": "/__tests__/cv.yml"
   }
 }

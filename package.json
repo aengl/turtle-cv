@@ -1,7 +1,7 @@
 {
   "name": "turtle-cv",
   "author": "Lynn Smeria <ae@cephea.de>",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "license": "The Unlicense",
   "description": "A YAML-based CV site generator with turtle powers!",
   "main": "index.js",
@@ -22,8 +22,10 @@
   "scripts": {
     "start": "node cli.js",
     "create:gallery": "node gallery/create.js",
+    "create:schema": "node schema/create.js",
     "dev": "nodemon",
-    "dev:gallery": "nodemon --config nodemon.gallery.json",
+    "dev:gallery": "nodemon --config gallery/nodemon.json",
+    "dev:schema": "nodemon --config schema/nodemon.json",
     "test": "ava"
   },
   "dependencies": {
@@ -33,12 +35,13 @@
     "pug": "2.0.3"
   },
   "devDependencies": {
+    "ajv": "6.5.2",
     "ava": "0.25.0",
     "eslint": "5.1.0",
     "eslint-config-airbnb-base": "13.0.0",
     "eslint-config-prettier": "2.9.0",
     "eslint-plugin-import": "2.13.0",
-    "nodemon": "1.18.1",
+    "nodemon": "1.18.2",
     "prettier": "1.13.7"
   }
 }

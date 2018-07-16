@@ -8,6 +8,7 @@
 - [Usage](#usage)
 - [Installation](#installation)
 - [Themes](#themes)
+- [Schema](#schema)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -67,6 +68,8 @@ Here's a command to get you started:
 ```
 wget https://raw.githubusercontent.com/aengl/turtle-cv/master/__tests__/cv.yml
 ```
+
+Check out the [schema file](/schema/schema.yml) for all supported attributes.
 
 ## Usage
 
@@ -128,6 +131,22 @@ Make a few adjustments and use it by adding a `-t` option like this:
 turtle-cv cv.yml -t /path/to/my_theme
 ```
 
+## Schema
+
+It is recommended to validate your CV against the [schema file](/schema/schema.yml) to get suggestions and error annotations. `turtle-cv` uses the [JSON Schema draft](http://json-schema.org/), which should be supported by every major editor through plugins.
+
+Here is how to set it up in Visual Studio Code:
+
+1.  Install [YAML Support by Red Hat](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml) ([click here to install](vscode:extension/redhat.vscode-yaml))
+1.  [Open Workspace settings](https://code.visualstudio.com/docs/getstarted/settings)
+1.  Add the following:
+
+    ```
+    "yaml.schemas": {
+      "https://aengl.github.io/turtle-cv/schema/schema.json": "/*"
+    }
+    ```
+
 ## Contributing
 
 The main purpose of this repository is to provide a painless experience for generating CVs. Bugfixes, improvements and additional themes are welcome as long as they adhere to that goal.
@@ -135,6 +154,8 @@ The main purpose of this repository is to provide a painless experience for gene
 The usual way to contribute is to fork the project, make changes on your fork and then create a pull request.
 
 But you're also welcome to create an issue in this repository, where you link to your theme.
+
+A note on themes: you are welcome to support attributes in your theme that are not in the schema. You don't have to support everything there is in the schema either, but the subset used in the [example CV](__tests__/cv.yml) needs to be fully supported.
 
 ## License
 

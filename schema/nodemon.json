@@ -1,0 +1,5 @@
+{
+  "watch": ["schema"],
+  "ext": "yml,js",
+  "exec": "node schema/create.js"
+}
