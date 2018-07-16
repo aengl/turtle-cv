@@ -20,5 +20,6 @@ module.exports = {
     pug.renderFile(templatePath, {
       ...data,
       markdown: s => markdown.toHTML(s),
+      sections: Object.keys(data), // Remember the order of the sections
     }),
 };

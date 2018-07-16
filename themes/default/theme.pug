@@ -25,8 +25,10 @@ html(lang='en')
           include theme.css
       block icons
         link(rel='stylesheet' href='https://use.fontawesome.com/releases/v5.1.0/css/all.css' integrity='sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt' crossorigin='anonymous')
-      meta(charset='utf-8')
-      meta(name='viewport' content='width=device-width, initial-scale=1')
+      block charset
+        meta(charset='utf-8')
+      block viewport
+        meta(name='viewport' content='width=device-width, initial-scale=1')
 
   body
     block profile
@@ -63,66 +65,75 @@ html(lang='en')
           +summary
           hr
 
-    block work
-      +section('work', 'Work History', 'fa fa-suitcase')
-        each item in work
-          if item
-            .item
-              +dates(item)
-              +url(item, 'company')
-              +attribute(item, 'position', 'Position: ')
-              +attribute(item, 'summary')
-              if item.highlights
-                ul.highlights
-                  each highlight in item.highlights
-                    li.highlight=highlight
+    //- Iterate sections to to maintain the original order of the YAML
+    each section in sections
 
-    block education
-      +section('education', 'Education', 'fa fa-graduation-cap')
-        each item in education
-          if item
-            .item
-              +dates(item)
-              +url(item, 'institution')
-              +attribute(item, 'area')
-              +attribute(item, 'degree', 'Degree: ')
+      if section == 'work'
+        block work
+          +section(section, 'Work History', 'fa fa-suitcase')
+            each item in work
+              if item
+                .item
+                  +dates(item)
+                  +url(item, 'company')
+                  +attribute(item, 'position', 'Position: ')
+                  +attribute(item, 'summary')
+                  if item.highlights
+                    ul.highlights
+                      each highlight in item.highlights
+                        li.highlight=highlight
 
-    block awards
-      +section('awards', 'Awards', 'fa fa-medal')
-        each item in awards
-          if item
-            .item
-              +attribute(item, 'date')
-              +url(item, 'name')
-              +attribute(item, 'awarder', 'Awarded by: ')
-              +attribute(item, 'summary')
+      if section ==  'education'
+        block education
+          +section(section, 'Education', 'fa fa-graduation-cap')
+            each item in education
+              if item
+                .item
+                  +dates(item)
+                  +url(item, 'institution')
+                  +attribute(item, 'area')
+                  +attribute(item, 'degree', 'Degree: ')
 
-    block publications
-      +section('publications', 'Publications', 'fa fa-pen-fancy')
-        each item in publications
-          if item
-            .item
-              +attribute(item, 'date')
-              +url(item, 'title')
-              +attribute(item, 'summary')
+      if section ==  'awards'
+        block awards
+          +section(section, 'Awards', 'fa fa-medal')
+            each item in awards
+              if item
+                .item
+                  +attribute(item, 'date')
+                  +url(item, 'name')
+                  +attribute(item, 'awarder', 'Awarded by: ')
+                  +attribute(item, 'summary')
 
-    block skills
-      +section('skills', 'Skills', 'fa fa-toolbox')
-        each item in skills
-          if item
-            .item
-              +attribute(item, 'name')
-              +attribute(item, 'level')
-              if item.keywords
-                ul.keywords
-                  each word in item.keywords
-                    li=word
+      if section ==  'publications'
+        block publications
+          +section(section, 'Publications', 'fa fa-pen-fancy')
+            each item in publications
+              if item
+                .item
+                  +attribute(item, 'date')
+                  +url(item, 'title')
+                  +attribute(item, 'summary')
 
-    block languages
-      +section('languages', 'Languages', 'fa fa-comments')
-        ul
-          each item in languages
-            if item
-              li
-                +attribute(item, 'name')
-                +attribute(item, 'level')
+      if section ==  'skills'
+        block skills
+          +section(section, 'Skills', 'fa fa-toolbox')
+            each item in skills
+              if item
+                .item
+                  +attribute(item, 'name')
+                  +attribute(item, 'level')
+                  if item.keywords
+                    ul.keywords
+                      each word in item.keywords
+                        li=word
+
+      if section ==  'languages'
+        block languages
+          +section(section, 'Languages', 'fa fa-comments')
+            ul
+              each item in languages
+                if item
+                  li
+                    +attribute(item, 'name')
+                    +attribute(item, 'level')
