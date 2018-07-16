@@ -5,8 +5,8 @@ const fs = require('fs');
 const path = require('path');
 const program = require('caporal');
 const packageJson = require('./package.json');
-const { generateHTML, parseCV } = require('./src');
-const { readPath, resolveTemplate, resolveYML } = require('./src/resolve');
+const { generateHTML, readCV } = require('./src');
+const { resolveTemplate, resolveYML } = require('./src/resolve');
 
 function forkAndWatch(file, logger) {
   if (!fs.existsSync(file)) {
@@ -24,6 +24,7 @@ program
   .version(packageJson.version)
   .description('Turn a YAML into a CV website')
   .argument('<yml>', 'YAML file with the CV data')
+  .option('-l, --language <code>', 'Language code (ISO 639-1)')
   .option(
     '-t, --template <name>',
     'Name of (or path to) the HTML template to use'
@@ -37,11 +38,11 @@ program
     } else {
       const cvPath = resolveYML(args.yml, null, '.yml');
       logger.info(`Reading CV from "${cvPath}"`);
-      const cv = parseCV(readPath(args.yml));
+      const cv = readCV(args.yml);
 
       const templatePath = resolveTemplate(options.template || 'default');
       logger.info(`Generating HTML from template at "${templatePath}"`);
-      const html = generateHTML(cv, templatePath);
+      const html = generateHTML(cv, templatePath, options.language);
 
       const outputPath =
         options.output || path.basename(cvPath).replace(/\.[^.]+$/, '.html');

@@ -1,8 +1,9 @@
 include ../common.pug
+include text.pug
 
 mixin section(name, text, icon)
   if locals[name]
-    .div(class=name)
+    div(class=name)
       h2
         i(class=icon)
         span=text
@@ -11,12 +12,12 @@ mixin section(name, text, icon)
 mixin dates(item)
   if item
     if item.until
-      .dates=`${item.from} to ${item.until}`
+      .dates=`${item.from} ${text.to} ${item.until}`
     else
-      .dates=`Since ${item.from}`
+      .dates=`${text.since} ${item.from}`
 
 doctype html
-html(lang='en')
+html(lang=language)
   block head
     head
       title=profile.name
@@ -70,7 +71,7 @@ html(lang='en')
 
       if section == 'work'
         block work
-          +section(section, 'Work History', 'fa fa-suitcase')
+          +section(section, text.work, 'fa fa-suitcase')
             each item in work
               if item
                 .item
@@ -85,7 +86,7 @@ html(lang='en')
 
       if section ==  'education'
         block education
-          +section(section, 'Education', 'fa fa-graduation-cap')
+          +section(section, text.education, 'fa fa-graduation-cap')
             each item in education
               if item
                 .item
@@ -96,7 +97,7 @@ html(lang='en')
 
       if section ==  'awards'
         block awards
-          +section(section, 'Awards', 'fa fa-medal')
+          +section(section, text.awards, 'fa fa-medal')
             each item in awards
               if item
                 .item
@@ -107,7 +108,7 @@ html(lang='en')
 
       if section ==  'publications'
         block publications
-          +section(section, 'Publications', 'fa fa-pen-fancy')
+          +section(section, text.publications, 'fa fa-pen-fancy')
             each item in publications
               if item
                 .item
@@ -117,7 +118,7 @@ html(lang='en')
 
       if section ==  'skills'
         block skills
-          +section(section, 'Skills', 'fa fa-toolbox')
+          +section(section, text.skills, 'fa fa-toolbox')
             each item in skills
               if item
                 .item
@@ -130,7 +131,7 @@ html(lang='en')
 
       if section ==  'languages'
         block languages
-          +section(section, 'Languages', 'fa fa-comments')
+          +section(section, text.languages, 'fa fa-comments')
             ul
               each item in languages
                 if item

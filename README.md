@@ -9,6 +9,7 @@
 - [Installation](#installation)
 - [Themes](#themes)
 - [Schema](#schema)
+- [Languages](#languages)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -20,7 +21,7 @@
 
 - **Data-oriented**: All data for your CV should be contained in a [single file](__tests__/cv.yml) that is completely design agnostic, and thus easy to maintain.
 
-- **Extensible**: All design decisions are made by themes, which are [Pug templates](https://github.com/pugjs/pug). You can easily hack an existing theme without cloning the repository. A theme can be based on another, simply adjusting some colors (check the [dark theme](themes/dark) for reference).
+- **Extensible**: All design decisions are made by themes, which are [Pug templates](https://github.com/pugjs/pug). You can easily hack an existing theme without even cloning the repository. A theme can be [based on another](themes/dark/theme.pug), simply [adjusting some colors](themes/dark/theme.css). Multiple languages are [supported as well](themes/default/text.pug).
 
 - **Simple**: All you need is your YAML file. The CLI can be used without installation, as long as you have `nodejs` installed.
 
@@ -107,7 +108,7 @@ turtle-cv cv.yml
 
 ## Themes
 
-Themes are [Pug templates](https://github.com/pugjs/pug), usually coupled with a CSS file.
+Themes are [Pug templates](https://github.com/pugjs/pug), usually coupled with a CSS file, and optionally a language file (YAML) for localisation.
 
 If you just want to use another theme, you can reference it by name using the `-t` option:
 
@@ -146,6 +147,18 @@ Here is how to set it up in Visual Studio Code:
       "https://aengl.github.io/turtle-cv/schema/schema.json": "/*"
     }
     ```
+
+## Languages
+
+Want to have a non-English CV? We got you covered!
+
+```
+turtle-cv cv.yml -l de
+```
+
+Well, sort of. Chances are your language isn't supported by the theme yet, but it's pretty easy to [hack it in](themes/default/text.pug).
+
+The language code is specified using [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes).
 
 ## Contributing
 

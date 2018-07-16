@@ -1,11 +1,11 @@
 const fs = require('fs');
 const pug = require('pug');
-const { generateHTML, parseCV } = require('../src');
-const { readPath, resolveTemplate, resolveYML } = require('../src/resolve');
+const { generateHTML, readCV } = require('../src');
+const { resolveTemplate, resolveYML } = require('../src/resolve');
 
 process.chdir(__dirname);
 
-const cv = parseCV(readPath(resolveYML('../__tests__/cv.yml')));
+const cv = readCV(resolveYML('../__tests__/cv.yml'));
 const themes = fs.readdirSync('../themes');
 const html = pug.renderFile('./index.pug', {
   themes: themes.map(theme => ({

@@ -34,11 +34,4 @@ module.exports = {
     }
     return existingUri;
   },
-
-  /**
-   * Reads the contents of a file.
-   * @param {string} filePath Path to the file to read.
-   * @returns {string} The file's contents.
-   */
-  readPath: filePath => fs.readFileSync(filePath, 'utf8'),
 };
