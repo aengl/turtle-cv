@@ -138,13 +138,16 @@ It is recommended to validate your CV against the [schema file](/schema/schema.y
 
 Here is how to set it up in Visual Studio Code:
 
-1.  Install [YAML Support by Red Hat](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml) ([click here to install](vscode:extension/redhat.vscode-yaml))
+1.  Install [YAML Support by Red Hat](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml)
 1.  [Open Workspace settings](https://code.visualstudio.com/docs/getstarted/settings)
-1.  Add the following:
+1.  Add the `yaml.schemas` key in your settings object:
 
     ```
-    "yaml.schemas": {
-      "https://aengl.github.io/turtle-cv/schema/schema.json": "/*"
+    {
+      ...
+      "yaml.schemas": {
+        "https://aengl.github.io/turtle-cv/schema/schema.json": "/*"
+      }
     }
     ```
 
