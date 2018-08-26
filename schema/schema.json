@@ -19,8 +19,7 @@
         },
         "label": {
           "type": "string",
-          "description": "One or more terms that best describe you",
-          "for example your profession": null
+          "description": "One or more terms that best describe you, for example your profession"
         },
         "email": {
           "type": "string",
@@ -40,8 +39,7 @@
         },
         "summary": {
           "type": "string",
-          "description": "A brief description of yourself",
-          "for example your interests and motivation": null
+          "description": "A brief description of yourself, for example your interests and motivation"
         }
       }
     },
@@ -111,7 +109,23 @@
             "type": "array",
             "description": "Things that you did during your employment that are particularly noteworthy",
             "items": {
-              "type": "string"
+              "type": "object",
+              "required": [
+                "description"
+              ],
+              "properties": {
+                "description": {
+                  "type": "string",
+                  "description": "Summary of the highlight"
+                },
+                "keywords": {
+                  "type": "array",
+                  "description": "Keywords, e.g. technologies and tools used",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
             }
           }
         }
@@ -137,8 +151,7 @@
           },
           "area": {
             "type": "string",
-            "description": "The area of studies that you persued",
-            "for example \"Computer Science\"": null
+            "description": "The area of studies that you persued for example \"Computer Science\""
           },
           "degree": {
             "type": "string",

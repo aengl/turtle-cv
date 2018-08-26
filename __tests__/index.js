@@ -20,7 +20,7 @@ test(`cv conforms to the schema`, t => {
   );
 });
 
-themes.filter(theme => theme !== 'common.pug').forEach(theme =>
+themes.filter(theme => theme.indexOf('.pug') === -1).forEach(theme =>
   test(`correctly applies theme "${theme}"`, t => {
     const template = resolveTemplate(theme);
     t.snapshot(generateHTML(cv, template));

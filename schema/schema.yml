@@ -1,93 +1,163 @@
 type: object
-required: [ profile ]
+required: [profile]
 additionalProperties: false
 properties:
-
   profile:
     type: object
-    required: [ name ]
+    required: [name]
     description: General profile information
     additionalProperties: false
     properties:
-      name: { type: string, description: Your full name }
-      label: { type: string, description: One or more terms that best describe you, for example your profession }
-      email: { type: string, description: Your e-mail address }
-      phone: { type: string, description: Your phone number }
-      website: { type: string, description: Your personal website }
-      location: { type: string, description: Where are you situated? }
-      summary: { type: string, description: A brief description of yourself, for example your interests and motivation }
+      name:
+        type: string
+        description: Your full name
+      label:
+        type: string
+        description: One or more terms that best describe you, for example your profession
+      email:
+        type: string
+        description: Your e-mail address
+      phone:
+        type: string
+        description: Your phone number
+      website:
+        type: string
+        description: Your personal website
+      location:
+        type: string
+        description: Where are you situated?
+      summary:
+        type: string
+        description: A brief description of yourself, for example your interests and motivation
 
   social:
     type: array
     description: Links to social networks
     items:
       type: object
-      required: [ network, url ]
+      required: [network, url]
       additionalProperties: false
       properties:
-        network: { type: string, description: Name of the social network }
-        url: { type: string, description: URL to your profile }
+        network:
+          type: string
+          description: Name of the social network
+        url:
+          type: string
+          description: URL to your profile
 
   work:
     type: array
     description: Your employment history
     items:
       type: object
-      required: [ company ]
+      required: [company]
       additionalProperties: false
       properties:
-        company: { type: string, description: The company name }
-        url: { type: string, description: URL to the company homepage }
-        position: { type: string, description: Your job title }
-        from: { type: [ number, string ], description: The date when you entered employment }
-        until: { type: [ number, string ], description: The date when you stopped working (leave empty if you're still employed) }
-        summary: { type: string, description: A short description of the company and/or your work there }
+        company:
+          type: string
+          description: The company name
+        url:
+          type: string
+          description: URL to the company homepage
+        position:
+          type: string
+          description: Your job title
+        from:
+          type: [number, string]
+          description: The date when you entered employment
+        until:
+          type: [number, string]
+          description: The date when you stopped working (leave empty if you're still employed)
+        summary:
+          type: string
+          description: A short description of the company and/or your work there
         highlights:
           type: array
           description: Things that you did during your employment that are particularly noteworthy
-          items: { type: string }
+          items:
+            type: object
+            required: [description]
+            properties:
+              description:
+                type: string
+                description: Summary of the highlight
+              keywords:
+                type: array
+                description: Keywords, e.g. technologies and tools used
+                items:
+                  type: string
 
   education:
     type: array
     description: Your education
     items:
       type: object
-      required: [ institution ]
+      required: [institution]
       additionalProperties: false
       properties:
-        institution: { type: string, description: Name of the education institution }
-        url: { type: string, description: URL of the institution }
-        area: { type: string, description: The area of studies that you persued, for example "Computer Science" }
-        degree: { type: string, description: The degree that you attained }
-        from: { type: [ number, string ], description: The date when you started the program }
-        until: { type: [ number, string ], description: The date when you stopped the program (leave empty if you're still enrolled) }
+        institution:
+          type: string
+          description: Name of the education institution
+        url:
+          type: string
+          description: URL of the institution
+        area:
+          type: string
+          description: The area of studies that you persued for example "Computer Science"
+        degree:
+          type: string
+          description: The degree that you attained
+        from:
+          type: [number, string]
+          description: The date when you started the program
+        until:
+          type: [number, string]
+          description: The date when you stopped the program (leave empty if you're still enrolled)
 
   awards:
     type: array
     description: Awards/achievements that you attained during your career
     items:
       type: object
-      required: [ name ]
+      required: [name]
       additionalProperties: false
       properties:
-        name: { type: string, description: Name of the award }
-        date: { type: [ number, string ], description: Date when you received the award }
-        awarder: { type: string, description: Institution that granted or sponsored the award }
-        url: { type: string, description: URL of the awarder or a record of your achievement }
-        summary: { type: string, description: A brief description of the award }
+        name:
+          type: string
+          description: Name of the award
+        date:
+          type: [number, string]
+          description: Date when you received the award
+        awarder:
+          type: string
+          description: Institution that granted or sponsored the award
+        url:
+          type: string
+          description: URL of the awarder or a record of your achievement
+        summary:
+          type: string
+          description: A brief description of the award
 
   publications:
     type: array
     description: Scientific papers that you (co-)authored
     items:
       type: object
-      required: [ title ]
+      required: [title]
       additionalProperties: false
       properties:
-        title: { type: string, description: Title of the paper }
-        date: { type: [ number, string ], description: Date when the paper was published }
-        url: { type: string, description: URL to the published paper }
-        summary: { type: string, description: A brief synopsis of the paper }
+        title:
+          type: string
+          description: Title of the paper
+        date:
+          type: [number, string]
+          description: Date when the paper was published
+        url:
+          type: string
+          description: URL to the published paper
+        summary:
+          type: string
+          description: A brief synopsis of the paper
 
   skills:
     type: array
@@ -95,23 +165,32 @@ properties:
     foo: bar
     items:
       type: object
-      required: [ name ]
+      required: [name]
       additionalProperties: false
       properties:
-        name: { type: string, description: Name of the skill }
-        level: { type: string, description: Your level of expertise in that skill }
+        name:
+          type: string
+          description: Name of the skill
+        level:
+          type: string
+          description: Your level of expertise in that skill
         keywords:
           type: array
           description: A couple of keywords that are relevant to the skill
-          items: { type: string }
+          items:
+            type: string
 
   languages:
     type: array
     description: Languages that you can speak
     items:
       type: object
-      required: [ name ]
+      required: [name]
       additionalProperties: false
       properties:
-        name: { type: string, description: Name of the language }
-        level: { type: string, description: Your level of proficiency in that language }
+        name:
+          type: string
+          description: Name of the language
+        level:
+          type: string
+          description: Your level of proficiency in that language

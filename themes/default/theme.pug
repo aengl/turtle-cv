@@ -82,9 +82,13 @@ html(lang=language)
                   if item.highlights
                     ul.highlights
                       each highlight in item.highlights
-                        li.highlight=highlight
+                        li.highlight=highlight.description
+                        if highlight.keywords
+                          ul.keywords
+                            each keyword in highlight.keywords
+                              li.keyword=keyword
 
-      if section ==  'education'
+      if section == 'education'
         block education
           +section(section, text.education, 'fa fa-graduation-cap')
             each item in education
@@ -95,7 +99,7 @@ html(lang=language)
                   +attribute(item, 'area')
                   +attribute(item, 'degree', 'Degree: ')
 
-      if section ==  'awards'
+      if section == 'awards'
         block awards
           +section(section, text.awards, 'fa fa-medal')
             each item in awards
@@ -106,7 +110,7 @@ html(lang=language)
                   +attribute(item, 'awarder', 'Awarded by: ')
                   +attribute(item, 'summary')
 
-      if section ==  'publications'
+      if section == 'publications'
         block publications
           +section(section, text.publications, 'fa fa-pen-fancy')
             each item in publications
@@ -116,7 +120,7 @@ html(lang=language)
                   +url(item, 'title')
                   +attribute(item, 'summary')
 
-      if section ==  'skills'
+      if section == 'skills'
         block skills
           +section(section, text.skills, 'fa fa-toolbox')
             each item in skills
@@ -129,7 +133,7 @@ html(lang=language)
                       each word in item.keywords
                         li=word
 
-      if section ==  'languages'
+      if section == 'languages'
         block languages
           +section(section, text.languages, 'fa fa-comments')
             ul

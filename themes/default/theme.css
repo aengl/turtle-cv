@@ -70,7 +70,10 @@ ul {
   margin: 0.4em 0;
 }
 
-/* Common */
+/* ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^
+ * Common
+ * ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^ */
+
 .item {
   margin: 2.4em 0;
 }
@@ -82,7 +85,10 @@ ul {
   font-size: 0.8em;
 }
 
-/* Profile */
+/* ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^
+ * Profile
+ * ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^ */
+
 .profile .label {
   margin: 0.2em 0;
   text-transform: uppercase;
@@ -101,7 +107,10 @@ ul {
   margin: 0.2em 0;
 }
 
-/* Social */
+/* ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^
+ * Social
+ * ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^ */
+
 .social {
   margin: 1.2rem 0;
   font-size: 3em;
@@ -115,7 +124,32 @@ ul {
   transform: scale(1.2);
 }
 
-/* Other sections */
+/* ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^
+ * Work
+ * ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^ */
+
+.work .highlights {
+  margin: 0.4em 0 0 0;
+}
+.work .highlights ul.keywords {
+  list-style: none;
+  margin: 0.3em 0 0.8em;
+  padding: 0;
+}
+.work .highlights li.keyword {
+  display: inline;
+  color: hsl(0, 0%, 30%);
+  background-color: hsl(0, 0%, 92%);
+  border-radius: 5px;
+  margin: 0.2em;
+  padding: 0.3em 0.7em;
+  font-size: 0.8em;
+}
+
+/* ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^
+ * Other sections
+ * ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^ */
+
 .work .company,
 .education .institution,
 .awards .name,
@@ -125,9 +159,6 @@ ul {
   font-size: 1rem;
   font-weight: var(--weight-bold);
   margin: 0.4em 0;
-}
-.work .highlights {
-  margin: 0.4em 0 0 0;
 }
 .skills .level {
   color: var(--light-color);

@@ -109,10 +109,14 @@ ul {
   margin: 0.4em 0;
 }
 
-/* Common */
+/* ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^
+ * Common
+ * ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^ */
+
 .item {
   margin: 2.4em 0;
 }
+.date,
 .dates {
   color: var(--light-color);
 }
@@ -120,26 +124,32 @@ ul {
   font-size: 0.8em;
 }
 
-/* Profile */
+/* ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^
+ * Profile
+ * ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^ */
+
 .profile .label {
   margin: 0.2em 0;
   text-transform: uppercase;
   color: var(--light-color);
 }
-.profile .description {
+.profile .summary {
   text-align: justify;
   margin: 2.2em 0;
   font-size: var(--small-font);
 }
-.profile .summary {
+.profile .details {
   margin: 1.8em 0;
   font-size: var(--small-font);
 }
-.profile .summary &gt; * {
+.profile .details &gt; * {
   margin: 0.2em 0;
 }
 
-/* Social */
+/* ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^
+ * Social
+ * ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^ */
+
 .social {
   margin: 1.2rem 0;
   font-size: 3em;
@@ -153,17 +163,41 @@ ul {
   transform: scale(1.2);
 }
 
-/* Work, Education, Skills &amp; Languages */
+/* ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^
+ * Work
+ * ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^ */
+
+.work .highlights {
+  margin: 0.4em 0 0 0;
+}
+.work .highlights ul.keywords {
+  list-style: none;
+  margin: 0.3em 0 0.8em;
+  padding: 0;
+}
+.work .highlights li.keyword {
+  display: inline;
+  color: hsl(0, 0%, 30%);
+  background-color: hsl(0, 0%, 92%);
+  border-radius: 5px;
+  margin: 0.2em;
+  padding: 0.3em 0.7em;
+  font-size: 0.8em;
+}
+
+/* ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^
+ * Other sections
+ * ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^ */
+
 .work .company,
 .education .institution,
+.awards .name,
+.publications .title,
 .skills .name,
 .languages .name {
   font-size: 1rem;
   font-weight: var(--weight-bold);
   margin: 0.4em 0;
-}
-.work .highlights {
-  margin: 0.4em 0 0 0;
 }
 .skills .level {
   color: var(--light-color);
@@ -171,9 +205,40 @@ ul {
 .languages li {
   margin-bottom: 0.4em;
 }
-.languages .fluency {
+.languages .level {
   font-size: var(--small-font);
   color: var(--light-color);
+}
+
+/* ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^
+ * Print
+ * ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^ */
+
+@page {
+  margin: 2cm;
+}
+
+@media print {
+  html {
+    margin: 0;
+    padding: 0;
+    font-size: 0.4cm;
+  }
+  body {
+    max-width: initial;
+  }
+  .social {
+    display: none;
+  }
+  .work,
+  .work item,
+  .education,
+  .awards,
+  .publications,
+  .skills,
+  .languages {
+    page-break-inside: avoid;
+  }
 }
 :root {
   --background: hsl(26, 10%, 11%);
@@ -181,11 +246,11 @@ ul {
   --theme-color: hsl(26, 100%, 50%);
   --light-color: hsl(26, 10%, 30%);
 }
-&lt;/style&gt;&lt;link rel=&quot;stylesheet&quot; href=&quot;https://use.fontawesome.com/releases/v5.1.0/css/all.css&quot; integrity=&quot;sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt&quot; crossorigin=&quot;anonymous&quot;&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;&lt;/head&gt;&lt;body&gt;&lt;div class=&quot;profile&quot;&gt;&lt;h1&gt;Donatello&lt;/h1&gt;&lt;div class=&quot;label&quot;&gt;Ninja Turtle&lt;/div&gt;&lt;div class=&quot;summary&quot;&gt;&lt;div&gt;&lt;i class=&quot;fa fa-envelope&quot;&gt;&lt;/i&gt;&lt;a href=&quot;mailto:donatello@tmnt.com&quot;&gt;donatello@tmnt.com&lt;/a&gt;&lt;/div&gt;&lt;div&gt;&lt;i class=&quot;fa fa-globe&quot;&gt;&lt;/i&gt;&lt;a href=&quot;https://www.donatello.net/&quot;&gt;https://www.donatello.net/&lt;/a&gt;&lt;/div&gt;&lt;div&gt;&lt;i class=&quot;fa fa-home&quot;&gt;&lt;/i&gt;&lt;span&gt;New York Sewers&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;social&quot;&gt;&lt;a href=&quot;https://github.com/donatello&quot;&gt;&lt;i class=&quot;fab fa-github&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a href=&quot;https://www.facebook.com/donatello&quot;&gt;&lt;i class=&quot;fab fa-facebook&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a href=&quot;https://www.linkedin.com/donatello&quot;&gt;&lt;i class=&quot;fab fa-instagram&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a href=&quot;https://www.linkedin.com/in/donatello&quot;&gt;&lt;i class=&quot;fab fa-linkedin&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;/div&gt;&lt;hr&gt;&lt;div class=&quot;description&quot;&gt;&lt;p&gt;Smartest of the four turtles. He is usually depicted wearing a purple eye mask. His primary signature weapon are his effective bō staffs. Donnie often speaks in technobabble with a natural aptitude for science and technology.&lt;/p&gt;
+&lt;/style&gt;&lt;link rel=&quot;stylesheet&quot; href=&quot;https://use.fontawesome.com/releases/v5.1.0/css/all.css&quot; integrity=&quot;sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt&quot; crossorigin=&quot;anonymous&quot;&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;&lt;/head&gt;&lt;body&gt;&lt;div class=&quot;profile&quot;&gt;&lt;h1&gt;Donatello&lt;/h1&gt;&lt;div class=&quot;label&quot;&gt;Ninja Turtle&lt;/div&gt;&lt;div class=&quot;details&quot;&gt;&lt;div class=&quot;email&quot;&gt;&lt;i class=&quot;fa fa-envelope&quot;&gt;&lt;/i&gt;&lt;a href=&quot;mailto:donatello@tmnt.com&quot;&gt;donatello@tmnt.com&lt;/a&gt;&lt;/div&gt;&lt;div class=&quot;website&quot;&gt;&lt;i class=&quot;fa fa-globe&quot;&gt;&lt;/i&gt;&lt;a href=&quot;https://www.donatello.net/&quot;&gt;https://www.donatello.net/&lt;/a&gt;&lt;/div&gt;&lt;div class=&quot;location&quot;&gt;&lt;i class=&quot;fa fa-home&quot;&gt;&lt;/i&gt;&lt;span&gt;New York Sewers&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;social&quot;&gt;&lt;a href=&quot;https://github.com/donatello&quot;&gt;&lt;i class=&quot;fab fa-github&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a href=&quot;https://www.facebook.com/donatello&quot;&gt;&lt;i class=&quot;fab fa-facebook&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a href=&quot;https://www.linkedin.com/donatello&quot;&gt;&lt;i class=&quot;fab fa-instagram&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a href=&quot;https://www.linkedin.com/in/donatello&quot;&gt;&lt;i class=&quot;fab fa-linkedin&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;/div&gt;&lt;hr&gt;&lt;div class=&quot;summary&quot;&gt;&lt;p&gt;Smartest of the four turtles. He is usually depicted wearing a purple eye mask. His primary signature weapon are his effective bō staffs. Donnie often speaks in technobabble with a natural aptitude for science and technology.&lt;/p&gt;
 
 &lt;p&gt;He is the third oldest/second youngest of the turtles. Like all of the brothers, he is named after a Renaissance artist; in this case, he is named after Italian sculptor Donatello.&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;Cowabunga!&lt;/strong&gt; 📣🐢&lt;/p&gt;&lt;/div&gt;&lt;hr&gt;&lt;/div&gt;&lt;div class=&quot;work&quot;&gt;&lt;h2&gt;&lt;i class=&quot;fa fa-suitcase&quot;&gt;&lt;/i&gt;&lt;span&gt;Work History&lt;/span&gt;&lt;/h2&gt;&lt;div class=&quot;item&quot;&gt;&lt;div class=&quot;dates&quot;&gt;Since September 2001&lt;/div&gt;&lt;div class=&quot;company&quot;&gt;TMNT&lt;/div&gt;&lt;div class=&quot;position&quot;&gt;Position: Ninja&lt;/div&gt;&lt;div class=&quot;summary&quot;&gt;After receiving training from Master Splinter, Donnie became part of the TMNT alongside Leonardo, Michelangelo and Raphael.&lt;/div&gt;&lt;ul class=&quot;highlights&quot;&gt;&lt;li class=&quot;highlight&quot;&gt;Ended the Foot Clan civil war&lt;/li&gt;&lt;li class=&quot;highlight&quot;&gt;Became a cyborg&lt;/li&gt;&lt;li class=&quot;highlight&quot;&gt;Ate tons of pizza&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;&lt;div class=&quot;item&quot;&gt;&lt;div class=&quot;dates&quot;&gt;April 1987 to September 1987&lt;/div&gt;&lt;div class=&quot;company&quot;&gt;New York Pet Shop&lt;/div&gt;&lt;div class=&quot;position&quot;&gt;Position: Pet Turtle&lt;/div&gt;&lt;div class=&quot;summary&quot;&gt;A dark year in Donnie's life, and one he rarely talks about.&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;education&quot;&gt;&lt;h2&gt;&lt;i class=&quot;fa fa-graduation-cap&quot;&gt;&lt;/i&gt;&lt;span&gt;Education&lt;/span&gt;&lt;/h2&gt;&lt;div class=&quot;item&quot;&gt;&lt;div class=&quot;dates&quot;&gt;1994 to September 2001&lt;/div&gt;&lt;div class=&quot;institution&quot;&gt;Master Splinter's School of Martial Arts&lt;/div&gt;&lt;div class=&quot;area&quot;&gt;Ninjutsu&lt;/div&gt;&lt;div class=&quot;degree&quot;&gt;Degree: MNi (Master of Ninja)&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;skills&quot;&gt;&lt;h2&gt;&lt;i class=&quot;fa fa-toolbox&quot;&gt;&lt;/i&gt;&lt;span&gt;Skills&lt;/span&gt;&lt;/h2&gt;&lt;div class=&quot;item&quot;&gt;&lt;div class=&quot;name&quot;&gt;Ninjitsu&lt;/div&gt;&lt;div class=&quot;level&quot;&gt;Master&lt;/div&gt;&lt;ul class=&quot;keywords&quot;&gt;&lt;li&gt;Kicking&lt;/li&gt;&lt;li&gt;Punching&lt;/li&gt;&lt;li&gt;Biting&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;&lt;div class=&quot;item&quot;&gt;&lt;div class=&quot;name&quot;&gt;Bō staffs&lt;/div&gt;&lt;div class=&quot;level&quot;&gt;Legendary&lt;/div&gt;&lt;ul class=&quot;keywords&quot;&gt;&lt;li&gt;Swinging&lt;/li&gt;&lt;li&gt;Hitting&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;&lt;div class=&quot;item&quot;&gt;&lt;div class=&quot;name&quot;&gt;Pizza&lt;/div&gt;&lt;div class=&quot;level&quot;&gt;Advanced&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;languages&quot;&gt;&lt;h2&gt;&lt;i class=&quot;fa fa-comments&quot;&gt;&lt;/i&gt;&lt;span&gt;Languages&lt;/span&gt;&lt;/h2&gt;&lt;ul&gt;&lt;li&gt;&lt;div class=&quot;name&quot;&gt;Turtle&lt;/div&gt;&lt;div class=&quot;fluency&quot;&gt;Native language&lt;/div&gt;&lt;/li&gt;&lt;li&gt;&lt;div class=&quot;name&quot;&gt;English&lt;/div&gt;&lt;div class=&quot;fluency&quot;&gt;Full professional proficiency&lt;/div&gt;&lt;/li&gt;&lt;li&gt;&lt;div class=&quot;name&quot;&gt;Italian&lt;/div&gt;&lt;div class=&quot;fluency&quot;&gt;Limited professional proficiency&lt;/div&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;">dark</li><li data-html="&lt;!DOCTYPE html&gt;&lt;html lang=&quot;en&quot;&gt;&lt;head&gt;&lt;title&gt;Donatello&lt;/title&gt;&lt;style&gt;@import url('https://fonts.googleapis.com/css?family=Exo+2:200|Merriweather:300,400');
+&lt;p&gt;&lt;strong&gt;Cowabunga!&lt;/strong&gt;&lt;/p&gt;&lt;/div&gt;&lt;hr&gt;&lt;/div&gt;&lt;div class=&quot;work&quot;&gt;&lt;h2&gt;&lt;i class=&quot;fa fa-suitcase&quot;&gt;&lt;/i&gt;&lt;span&gt;Work History&lt;/span&gt;&lt;/h2&gt;&lt;div class=&quot;item&quot;&gt;&lt;div class=&quot;dates&quot;&gt;Since September 2001&lt;/div&gt;&lt;div class=&quot;company&quot;&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Teenage_Mutant_Ninja_Turtles&quot;&gt;TMNT&lt;/a&gt;&lt;/div&gt;&lt;div class=&quot;position&quot;&gt;Position: Ninja&lt;/div&gt;&lt;div class=&quot;summary&quot;&gt;After receiving training from Master Splinter, Donnie became part of the TMNT alongside Leonardo, Michelangelo and Raphael.&lt;/div&gt;&lt;ul class=&quot;highlights&quot;&gt;&lt;li class=&quot;highlight&quot;&gt;Ended the Foot Clan civil war&lt;/li&gt;&lt;ul class=&quot;keywords&quot;&gt;&lt;li class=&quot;keyword&quot;&gt;staff&lt;/li&gt;&lt;li class=&quot;keyword&quot;&gt;ninjutsu&lt;/li&gt;&lt;/ul&gt;&lt;li class=&quot;highlight&quot;&gt;Ate tons of pizza&lt;/li&gt;&lt;ul class=&quot;keywords&quot;&gt;&lt;li class=&quot;keyword&quot;&gt;chicken&lt;/li&gt;&lt;li class=&quot;keyword&quot;&gt;mushrooms&lt;/li&gt;&lt;li class=&quot;keyword&quot;&gt;green peppers&lt;/li&gt;&lt;li class=&quot;keyword&quot;&gt;tomatoes&lt;/li&gt;&lt;/ul&gt;&lt;li class=&quot;highlight&quot;&gt;Became a cyborg&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;&lt;div class=&quot;item&quot;&gt;&lt;div class=&quot;dates&quot;&gt;April 1987 to September 1987&lt;/div&gt;&lt;div class=&quot;company&quot;&gt;New York Pet Shop&lt;/div&gt;&lt;div class=&quot;position&quot;&gt;Position: Pet Turtle&lt;/div&gt;&lt;div class=&quot;summary&quot;&gt;A dark year in Donnie's life, and one he rarely talks about.&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;education&quot;&gt;&lt;h2&gt;&lt;i class=&quot;fa fa-graduation-cap&quot;&gt;&lt;/i&gt;&lt;span&gt;Education&lt;/span&gt;&lt;/h2&gt;&lt;div class=&quot;item&quot;&gt;&lt;div class=&quot;dates&quot;&gt;1994 to September 2001&lt;/div&gt;&lt;div class=&quot;institution&quot;&gt;Master Splinter's School of Martial Arts&lt;/div&gt;&lt;div class=&quot;area&quot;&gt;Ninjutsu&lt;/div&gt;&lt;div class=&quot;degree&quot;&gt;Degree: MNi (Master of Ninja)&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;skills&quot;&gt;&lt;h2&gt;&lt;i class=&quot;fa fa-toolbox&quot;&gt;&lt;/i&gt;&lt;span&gt;Skills&lt;/span&gt;&lt;/h2&gt;&lt;div class=&quot;item&quot;&gt;&lt;div class=&quot;name&quot;&gt;Ninjitsu&lt;/div&gt;&lt;div class=&quot;level&quot;&gt;Master&lt;/div&gt;&lt;ul class=&quot;keywords&quot;&gt;&lt;li&gt;Kicking&lt;/li&gt;&lt;li&gt;Punching&lt;/li&gt;&lt;li&gt;Biting&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;&lt;div class=&quot;item&quot;&gt;&lt;div class=&quot;name&quot;&gt;Bō staffs&lt;/div&gt;&lt;div class=&quot;level&quot;&gt;Legendary&lt;/div&gt;&lt;ul class=&quot;keywords&quot;&gt;&lt;li&gt;Swinging&lt;/li&gt;&lt;li&gt;Hitting&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;&lt;div class=&quot;item&quot;&gt;&lt;div class=&quot;name&quot;&gt;Computers &amp;amp; Engineering&lt;/div&gt;&lt;div class=&quot;level&quot;&gt;Advanced&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;languages&quot;&gt;&lt;h2&gt;&lt;i class=&quot;fa fa-comments&quot;&gt;&lt;/i&gt;&lt;span&gt;Languages&lt;/span&gt;&lt;/h2&gt;&lt;ul&gt;&lt;li&gt;&lt;div class=&quot;name&quot;&gt;Turtle&lt;/div&gt;&lt;div class=&quot;level&quot;&gt;Native language&lt;/div&gt;&lt;/li&gt;&lt;li&gt;&lt;div class=&quot;name&quot;&gt;English&lt;/div&gt;&lt;div class=&quot;level&quot;&gt;Full professional proficiency&lt;/div&gt;&lt;/li&gt;&lt;li&gt;&lt;div class=&quot;name&quot;&gt;Italian&lt;/div&gt;&lt;div class=&quot;level&quot;&gt;Limited professional proficiency&lt;/div&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;">dark</li><li data-html="&lt;!DOCTYPE html&gt;&lt;html lang=&quot;en&quot;&gt;&lt;head&gt;&lt;title&gt;Donatello&lt;/title&gt;&lt;style&gt;@import url('https://fonts.googleapis.com/css?family=Exo+2:200|Merriweather:300,400');
 
 :root {
   --background: white;
@@ -257,10 +322,14 @@ ul {
   margin: 0.4em 0;
 }
 
-/* Common */
+/* ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^
+ * Common
+ * ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^ */
+
 .item {
   margin: 2.4em 0;
 }
+.date,
 .dates {
   color: var(--light-color);
 }
@@ -268,26 +337,32 @@ ul {
   font-size: 0.8em;
 }
 
-/* Profile */
+/* ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^
+ * Profile
+ * ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^ */
+
 .profile .label {
   margin: 0.2em 0;
   text-transform: uppercase;
   color: var(--light-color);
 }
-.profile .description {
+.profile .summary {
   text-align: justify;
   margin: 2.2em 0;
   font-size: var(--small-font);
 }
-.profile .summary {
+.profile .details {
   margin: 1.8em 0;
   font-size: var(--small-font);
 }
-.profile .summary &gt; * {
+.profile .details &gt; * {
   margin: 0.2em 0;
 }
 
-/* Social */
+/* ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^
+ * Social
+ * ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^ */
+
 .social {
   margin: 1.2rem 0;
   font-size: 3em;
@@ -301,17 +376,41 @@ ul {
   transform: scale(1.2);
 }
 
-/* Work, Education, Skills &amp; Languages */
+/* ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^
+ * Work
+ * ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^ */
+
+.work .highlights {
+  margin: 0.4em 0 0 0;
+}
+.work .highlights ul.keywords {
+  list-style: none;
+  margin: 0.3em 0 0.8em;
+  padding: 0;
+}
+.work .highlights li.keyword {
+  display: inline;
+  color: hsl(0, 0%, 30%);
+  background-color: hsl(0, 0%, 92%);
+  border-radius: 5px;
+  margin: 0.2em;
+  padding: 0.3em 0.7em;
+  font-size: 0.8em;
+}
+
+/* ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^
+ * Other sections
+ * ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^ */
+
 .work .company,
 .education .institution,
+.awards .name,
+.publications .title,
 .skills .name,
 .languages .name {
   font-size: 1rem;
   font-weight: var(--weight-bold);
   margin: 0.4em 0;
-}
-.work .highlights {
-  margin: 0.4em 0 0 0;
 }
 .skills .level {
   color: var(--light-color);
@@ -319,15 +418,46 @@ ul {
 .languages li {
   margin-bottom: 0.4em;
 }
-.languages .fluency {
+.languages .level {
   font-size: var(--small-font);
   color: var(--light-color);
 }
-&lt;/style&gt;&lt;link rel=&quot;stylesheet&quot; href=&quot;https://use.fontawesome.com/releases/v5.1.0/css/all.css&quot; integrity=&quot;sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt&quot; crossorigin=&quot;anonymous&quot;&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;&lt;/head&gt;&lt;body&gt;&lt;div class=&quot;profile&quot;&gt;&lt;h1&gt;Donatello&lt;/h1&gt;&lt;div class=&quot;label&quot;&gt;Ninja Turtle&lt;/div&gt;&lt;div class=&quot;summary&quot;&gt;&lt;div&gt;&lt;i class=&quot;fa fa-envelope&quot;&gt;&lt;/i&gt;&lt;a href=&quot;mailto:donatello@tmnt.com&quot;&gt;donatello@tmnt.com&lt;/a&gt;&lt;/div&gt;&lt;div&gt;&lt;i class=&quot;fa fa-globe&quot;&gt;&lt;/i&gt;&lt;a href=&quot;https://www.donatello.net/&quot;&gt;https://www.donatello.net/&lt;/a&gt;&lt;/div&gt;&lt;div&gt;&lt;i class=&quot;fa fa-home&quot;&gt;&lt;/i&gt;&lt;span&gt;New York Sewers&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;social&quot;&gt;&lt;a href=&quot;https://github.com/donatello&quot;&gt;&lt;i class=&quot;fab fa-github&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a href=&quot;https://www.facebook.com/donatello&quot;&gt;&lt;i class=&quot;fab fa-facebook&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a href=&quot;https://www.linkedin.com/donatello&quot;&gt;&lt;i class=&quot;fab fa-instagram&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a href=&quot;https://www.linkedin.com/in/donatello&quot;&gt;&lt;i class=&quot;fab fa-linkedin&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;/div&gt;&lt;hr&gt;&lt;div class=&quot;description&quot;&gt;&lt;p&gt;Smartest of the four turtles. He is usually depicted wearing a purple eye mask. His primary signature weapon are his effective bō staffs. Donnie often speaks in technobabble with a natural aptitude for science and technology.&lt;/p&gt;
+
+/* ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^
+ * Print
+ * ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^ */
+
+@page {
+  margin: 2cm;
+}
+
+@media print {
+  html {
+    margin: 0;
+    padding: 0;
+    font-size: 0.4cm;
+  }
+  body {
+    max-width: initial;
+  }
+  .social {
+    display: none;
+  }
+  .work,
+  .work item,
+  .education,
+  .awards,
+  .publications,
+  .skills,
+  .languages {
+    page-break-inside: avoid;
+  }
+}
+&lt;/style&gt;&lt;link rel=&quot;stylesheet&quot; href=&quot;https://use.fontawesome.com/releases/v5.1.0/css/all.css&quot; integrity=&quot;sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt&quot; crossorigin=&quot;anonymous&quot;&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;&lt;/head&gt;&lt;body&gt;&lt;div class=&quot;profile&quot;&gt;&lt;h1&gt;Donatello&lt;/h1&gt;&lt;div class=&quot;label&quot;&gt;Ninja Turtle&lt;/div&gt;&lt;div class=&quot;details&quot;&gt;&lt;div class=&quot;email&quot;&gt;&lt;i class=&quot;fa fa-envelope&quot;&gt;&lt;/i&gt;&lt;a href=&quot;mailto:donatello@tmnt.com&quot;&gt;donatello@tmnt.com&lt;/a&gt;&lt;/div&gt;&lt;div class=&quot;website&quot;&gt;&lt;i class=&quot;fa fa-globe&quot;&gt;&lt;/i&gt;&lt;a href=&quot;https://www.donatello.net/&quot;&gt;https://www.donatello.net/&lt;/a&gt;&lt;/div&gt;&lt;div class=&quot;location&quot;&gt;&lt;i class=&quot;fa fa-home&quot;&gt;&lt;/i&gt;&lt;span&gt;New York Sewers&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;social&quot;&gt;&lt;a href=&quot;https://github.com/donatello&quot;&gt;&lt;i class=&quot;fab fa-github&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a href=&quot;https://www.facebook.com/donatello&quot;&gt;&lt;i class=&quot;fab fa-facebook&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a href=&quot;https://www.linkedin.com/donatello&quot;&gt;&lt;i class=&quot;fab fa-instagram&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a href=&quot;https://www.linkedin.com/in/donatello&quot;&gt;&lt;i class=&quot;fab fa-linkedin&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;/div&gt;&lt;hr&gt;&lt;div class=&quot;summary&quot;&gt;&lt;p&gt;Smartest of the four turtles. He is usually depicted wearing a purple eye mask. His primary signature weapon are his effective bō staffs. Donnie often speaks in technobabble with a natural aptitude for science and technology.&lt;/p&gt;
 
 &lt;p&gt;He is the third oldest/second youngest of the turtles. Like all of the brothers, he is named after a Renaissance artist; in this case, he is named after Italian sculptor Donatello.&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;Cowabunga!&lt;/strong&gt; 📣🐢&lt;/p&gt;&lt;/div&gt;&lt;hr&gt;&lt;/div&gt;&lt;div class=&quot;work&quot;&gt;&lt;h2&gt;&lt;i class=&quot;fa fa-suitcase&quot;&gt;&lt;/i&gt;&lt;span&gt;Work History&lt;/span&gt;&lt;/h2&gt;&lt;div class=&quot;item&quot;&gt;&lt;div class=&quot;dates&quot;&gt;Since September 2001&lt;/div&gt;&lt;div class=&quot;company&quot;&gt;TMNT&lt;/div&gt;&lt;div class=&quot;position&quot;&gt;Position: Ninja&lt;/div&gt;&lt;div class=&quot;summary&quot;&gt;After receiving training from Master Splinter, Donnie became part of the TMNT alongside Leonardo, Michelangelo and Raphael.&lt;/div&gt;&lt;ul class=&quot;highlights&quot;&gt;&lt;li class=&quot;highlight&quot;&gt;Ended the Foot Clan civil war&lt;/li&gt;&lt;li class=&quot;highlight&quot;&gt;Became a cyborg&lt;/li&gt;&lt;li class=&quot;highlight&quot;&gt;Ate tons of pizza&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;&lt;div class=&quot;item&quot;&gt;&lt;div class=&quot;dates&quot;&gt;April 1987 to September 1987&lt;/div&gt;&lt;div class=&quot;company&quot;&gt;New York Pet Shop&lt;/div&gt;&lt;div class=&quot;position&quot;&gt;Position: Pet Turtle&lt;/div&gt;&lt;div class=&quot;summary&quot;&gt;A dark year in Donnie's life, and one he rarely talks about.&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;education&quot;&gt;&lt;h2&gt;&lt;i class=&quot;fa fa-graduation-cap&quot;&gt;&lt;/i&gt;&lt;span&gt;Education&lt;/span&gt;&lt;/h2&gt;&lt;div class=&quot;item&quot;&gt;&lt;div class=&quot;dates&quot;&gt;1994 to September 2001&lt;/div&gt;&lt;div class=&quot;institution&quot;&gt;Master Splinter's School of Martial Arts&lt;/div&gt;&lt;div class=&quot;area&quot;&gt;Ninjutsu&lt;/div&gt;&lt;div class=&quot;degree&quot;&gt;Degree: MNi (Master of Ninja)&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;skills&quot;&gt;&lt;h2&gt;&lt;i class=&quot;fa fa-toolbox&quot;&gt;&lt;/i&gt;&lt;span&gt;Skills&lt;/span&gt;&lt;/h2&gt;&lt;div class=&quot;item&quot;&gt;&lt;div class=&quot;name&quot;&gt;Ninjitsu&lt;/div&gt;&lt;div class=&quot;level&quot;&gt;Master&lt;/div&gt;&lt;ul class=&quot;keywords&quot;&gt;&lt;li&gt;Kicking&lt;/li&gt;&lt;li&gt;Punching&lt;/li&gt;&lt;li&gt;Biting&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;&lt;div class=&quot;item&quot;&gt;&lt;div class=&quot;name&quot;&gt;Bō staffs&lt;/div&gt;&lt;div class=&quot;level&quot;&gt;Legendary&lt;/div&gt;&lt;ul class=&quot;keywords&quot;&gt;&lt;li&gt;Swinging&lt;/li&gt;&lt;li&gt;Hitting&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;&lt;div class=&quot;item&quot;&gt;&lt;div class=&quot;name&quot;&gt;Pizza&lt;/div&gt;&lt;div class=&quot;level&quot;&gt;Advanced&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;languages&quot;&gt;&lt;h2&gt;&lt;i class=&quot;fa fa-comments&quot;&gt;&lt;/i&gt;&lt;span&gt;Languages&lt;/span&gt;&lt;/h2&gt;&lt;ul&gt;&lt;li&gt;&lt;div class=&quot;name&quot;&gt;Turtle&lt;/div&gt;&lt;div class=&quot;fluency&quot;&gt;Native language&lt;/div&gt;&lt;/li&gt;&lt;li&gt;&lt;div class=&quot;name&quot;&gt;English&lt;/div&gt;&lt;div class=&quot;fluency&quot;&gt;Full professional proficiency&lt;/div&gt;&lt;/li&gt;&lt;li&gt;&lt;div class=&quot;name&quot;&gt;Italian&lt;/div&gt;&lt;div class=&quot;fluency&quot;&gt;Limited professional proficiency&lt;/div&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;">default</li></ul><iframe id="preview"></iframe><script>/* eslint-env browser */
+&lt;p&gt;&lt;strong&gt;Cowabunga!&lt;/strong&gt;&lt;/p&gt;&lt;/div&gt;&lt;hr&gt;&lt;/div&gt;&lt;div class=&quot;work&quot;&gt;&lt;h2&gt;&lt;i class=&quot;fa fa-suitcase&quot;&gt;&lt;/i&gt;&lt;span&gt;Work History&lt;/span&gt;&lt;/h2&gt;&lt;div class=&quot;item&quot;&gt;&lt;div class=&quot;dates&quot;&gt;Since September 2001&lt;/div&gt;&lt;div class=&quot;company&quot;&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Teenage_Mutant_Ninja_Turtles&quot;&gt;TMNT&lt;/a&gt;&lt;/div&gt;&lt;div class=&quot;position&quot;&gt;Position: Ninja&lt;/div&gt;&lt;div class=&quot;summary&quot;&gt;After receiving training from Master Splinter, Donnie became part of the TMNT alongside Leonardo, Michelangelo and Raphael.&lt;/div&gt;&lt;ul class=&quot;highlights&quot;&gt;&lt;li class=&quot;highlight&quot;&gt;Ended the Foot Clan civil war&lt;/li&gt;&lt;ul class=&quot;keywords&quot;&gt;&lt;li class=&quot;keyword&quot;&gt;staff&lt;/li&gt;&lt;li class=&quot;keyword&quot;&gt;ninjutsu&lt;/li&gt;&lt;/ul&gt;&lt;li class=&quot;highlight&quot;&gt;Ate tons of pizza&lt;/li&gt;&lt;ul class=&quot;keywords&quot;&gt;&lt;li class=&quot;keyword&quot;&gt;chicken&lt;/li&gt;&lt;li class=&quot;keyword&quot;&gt;mushrooms&lt;/li&gt;&lt;li class=&quot;keyword&quot;&gt;green peppers&lt;/li&gt;&lt;li class=&quot;keyword&quot;&gt;tomatoes&lt;/li&gt;&lt;/ul&gt;&lt;li class=&quot;highlight&quot;&gt;Became a cyborg&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;&lt;div class=&quot;item&quot;&gt;&lt;div class=&quot;dates&quot;&gt;April 1987 to September 1987&lt;/div&gt;&lt;div class=&quot;company&quot;&gt;New York Pet Shop&lt;/div&gt;&lt;div class=&quot;position&quot;&gt;Position: Pet Turtle&lt;/div&gt;&lt;div class=&quot;summary&quot;&gt;A dark year in Donnie's life, and one he rarely talks about.&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;education&quot;&gt;&lt;h2&gt;&lt;i class=&quot;fa fa-graduation-cap&quot;&gt;&lt;/i&gt;&lt;span&gt;Education&lt;/span&gt;&lt;/h2&gt;&lt;div class=&quot;item&quot;&gt;&lt;div class=&quot;dates&quot;&gt;1994 to September 2001&lt;/div&gt;&lt;div class=&quot;institution&quot;&gt;Master Splinter's School of Martial Arts&lt;/div&gt;&lt;div class=&quot;area&quot;&gt;Ninjutsu&lt;/div&gt;&lt;div class=&quot;degree&quot;&gt;Degree: MNi (Master of Ninja)&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;skills&quot;&gt;&lt;h2&gt;&lt;i class=&quot;fa fa-toolbox&quot;&gt;&lt;/i&gt;&lt;span&gt;Skills&lt;/span&gt;&lt;/h2&gt;&lt;div class=&quot;item&quot;&gt;&lt;div class=&quot;name&quot;&gt;Ninjitsu&lt;/div&gt;&lt;div class=&quot;level&quot;&gt;Master&lt;/div&gt;&lt;ul class=&quot;keywords&quot;&gt;&lt;li&gt;Kicking&lt;/li&gt;&lt;li&gt;Punching&lt;/li&gt;&lt;li&gt;Biting&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;&lt;div class=&quot;item&quot;&gt;&lt;div class=&quot;name&quot;&gt;Bō staffs&lt;/div&gt;&lt;div class=&quot;level&quot;&gt;Legendary&lt;/div&gt;&lt;ul class=&quot;keywords&quot;&gt;&lt;li&gt;Swinging&lt;/li&gt;&lt;li&gt;Hitting&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;&lt;div class=&quot;item&quot;&gt;&lt;div class=&quot;name&quot;&gt;Computers &amp;amp; Engineering&lt;/div&gt;&lt;div class=&quot;level&quot;&gt;Advanced&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;languages&quot;&gt;&lt;h2&gt;&lt;i class=&quot;fa fa-comments&quot;&gt;&lt;/i&gt;&lt;span&gt;Languages&lt;/span&gt;&lt;/h2&gt;&lt;ul&gt;&lt;li&gt;&lt;div class=&quot;name&quot;&gt;Turtle&lt;/div&gt;&lt;div class=&quot;level&quot;&gt;Native language&lt;/div&gt;&lt;/li&gt;&lt;li&gt;&lt;div class=&quot;name&quot;&gt;English&lt;/div&gt;&lt;div class=&quot;level&quot;&gt;Full professional proficiency&lt;/div&gt;&lt;/li&gt;&lt;li&gt;&lt;div class=&quot;name&quot;&gt;Italian&lt;/div&gt;&lt;div class=&quot;level&quot;&gt;Limited professional proficiency&lt;/div&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;">default</li></ul><iframe id="preview"></iframe><script>/* eslint-env browser */
 
 const themes = document.getElementById('themes');
 const preview = document.getElementById('preview');
