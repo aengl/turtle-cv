@@ -170,3 +170,34 @@ ul {
   font-size: var(--small-font);
   color: var(--light-color);
 }
+
+/* ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^
+ * Print
+ * ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^ */
+
+@page {
+  margin: 2cm;
+}
+
+@media print {
+  html {
+    margin: 0;
+    padding: 0;
+    font-size: 0.4cm;
+  }
+  body {
+    max-width: initial;
+  }
+  .social {
+    display: none;
+  }
+  .work,
+  .work item,
+  .education,
+  .awards,
+  .publications,
+  .skills,
+  .languages {
+    page-break-inside: avoid;
+  }
+}
