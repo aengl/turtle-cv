@@ -82,11 +82,11 @@ html(lang=language)
                   if item.highlights
                     ul.highlights
                       each highlight in item.highlights
-                        li.highlight=highlight.description
+                        li=highlight.description
                         if highlight.keywords
                           ul.keywords
                             each keyword in highlight.keywords
-                              li.keyword=keyword
+                              li=keyword
 
       if section == 'education'
         block education

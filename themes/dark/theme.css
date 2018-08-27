@@ -4,3 +4,7 @@
   --theme-color: hsl(26, 100%, 50%);
   --light-color: hsl(26, 10%, 30%);
 }
+.work ul.keywords > li {
+  color: hsl(26, 20%, 70%);
+  background-color: hsl(26, 20%, 20%);
+}
