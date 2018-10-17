@@ -35,13 +35,13 @@
     "pug": "2.0.3"
   },
   "devDependencies": {
-    "ajv": "6.5.3",
+    "ajv": "6.5.4",
     "ava": "0.25.0",
-    "eslint": "5.4.0",
+    "eslint": "5.7.0",
     "eslint-config-airbnb-base": "13.1.0",
-    "eslint-config-prettier": "3.0.1",
+    "eslint-config-prettier": "3.1.0",
     "eslint-plugin-import": "2.14.0",
-    "nodemon": "1.18.3",
-    "prettier": "1.14.2"
+    "nodemon": "1.18.4",
+    "prettier": "1.14.3"
   }
 }
