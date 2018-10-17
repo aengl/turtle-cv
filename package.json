@@ -2,7 +2,7 @@
   "name": "turtle-cv",
   "author": "Lynn Smeria <ae@cephea.de>",
   "version": "0.6.0",
-  "license": "The Unlicense",
+  "license": "Unlicense",
   "description": "A YAML-based CV site generator with turtle powers!",
   "main": "index.js",
   "repository": {

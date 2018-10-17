@@ -57,7 +57,7 @@ You can browse all available themes in the [🌠 Theme Gallery](https://aengl.gi
 
 ## Prerequisites
 
-This project requires a recent version of [nodejs](https://nodejs.org/en/) installed. Everything >= 8 should work, but only the latest version is tested.
+This project requires a recent version of [Node.js](https://nodejs.org/en/) installed. Everything `>= 8` should work, but only the latest version is tested.
 
 ## Getting Started
 
