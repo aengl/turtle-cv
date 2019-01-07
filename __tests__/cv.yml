@@ -28,13 +28,13 @@ work:
     url: https://en.wikipedia.org/wiki/Teenage_Mutant_Ninja_Turtles
     position: Ninja
     from: September 2001
-    summary: After receiving training from Master Splinter, Donnie became part of the TMNT alongside Leonardo, Michelangelo and Raphael.
+    summary: After receiving training from [Master Splinter](https://en.wikipedia.org/wiki/Splinter_(Teenage_Mutant_Ninja_Turtles)), Donnie became part of the TMNT alongside Leonardo, Michelangelo and Raphael.
     highlights:
-      - description: Ended the Foot Clan civil war
+      - summary: Ended the [Foot Clan](https://en.wikipedia.org/wiki/Foot_Clan) civil war
         keywords: [staff, ninjutsu]
-      - description: Ate tons of pizza
+      - summary: Ate tons of pizza
         keywords: [chicken, mushrooms, green peppers, tomatoes]
-      - description: Became a cyborg
+      - summary: Became a cyborg
 
   - company: New York Pet Shop
     position: Pet Turtle

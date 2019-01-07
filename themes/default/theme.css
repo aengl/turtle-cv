@@ -5,6 +5,7 @@
   --text-color: black;
   --theme-color: hsl(26, 100%, 50%);
   --light-color: #999;
+  --anchor-color: hsl(26, 100%, 25%);
   --small-font: 0.8em;
   --weight-bold: 500;
 }
@@ -41,12 +42,10 @@ h1 {
   margin: 0.4em 0;
   font-size: 2.4em;
 }
-
 h2 {
   margin: 2em 0 1.2em;
   font-size: 1.6em;
 }
-
 h1,
 h2 {
   color: var(--theme-color);
@@ -58,16 +57,22 @@ h2 {
 
 a {
   text-decoration: none;
-  color: var(--text-color);
+  color: var(--anchor-color);
 }
-
 a:hover {
   color: var(--theme-color);
+}
+
+p {
+  margin: 0.5em 0;
 }
 
 ul {
   padding-left: 25px;
   margin: 0.4em 0;
+}
+li p {
+  margin: 0;
 }
 
 /* ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^

@@ -3,7 +3,7 @@ include text.pug
 
 mixin section(name, text, icon)
   if locals[name]
-    div(class=name)
+    section(class=name)
       h2
         i(class=icon)
         span=text
@@ -33,7 +33,7 @@ html(lang=language)
 
   body
     block profile
-      .profile
+      section.profile
         h1=profile.name
         +attribute(profile, 'label')
 
@@ -78,11 +78,11 @@ html(lang=language)
                   +dates(item)
                   +url(item, 'company')
                   +attribute(item, 'position', 'Position: ')
-                  +attribute(item, 'summary')
+                  +attribute-markdown(item, 'summary')
                   if item.highlights
                     ul.highlights
                       each highlight in item.highlights
-                        li=highlight.description
+                        li!=markdown(highlight.summary)
                         if highlight.keywords
                           ul.keywords
                             each keyword in highlight.keywords
@@ -108,7 +108,7 @@ html(lang=language)
                   +attribute(item, 'date')
                   +url(item, 'name')
                   +attribute(item, 'awarder', 'Awarded by: ')
-                  +attribute(item, 'summary')
+                  +attribute-markdown(item, 'summary')
 
       if section == 'publications'
         block publications
@@ -118,7 +118,7 @@ html(lang=language)
                 .item
                   +attribute(item, 'date')
                   +url(item, 'title')
-                  +attribute(item, 'summary')
+                  +attribute-markdown(item, 'summary')
 
       if section == 'skills'
         block skills

@@ -7,6 +7,11 @@ mixin attribute(item, attr, prefix)
     else
       div(class=attr)=`${prefix || ''}${item[attr]}`
 
+//- Processes an item's attribute with markdown
+mixin attribute-markdown(item, attr, prefix)
+  if item && item[attr]
+    div(class=attr)!=markdown(`${prefix || ''}${item[attr]}`)
+
 //- Same as +attribute, but the div also becomes the anchor for the item's url
 mixin url(item, attr, prefix)
   if item && item[attr]
