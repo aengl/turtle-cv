@@ -29,19 +29,19 @@
     "test": "ava"
   },
   "dependencies": {
-    "caporal": "0.10.0",
-    "js-yaml": "3.12.0",
+    "caporal": "1.1.0",
+    "js-yaml": "3.12.1",
     "markdown": "0.5.0",
     "pug": "2.0.3"
   },
   "devDependencies": {
-    "ajv": "6.5.4",
-    "ava": "0.25.0",
-    "eslint": "5.7.0",
+    "ajv": "6.6.2",
+    "ava": "1.0.1",
+    "eslint": "5.12.0",
     "eslint-config-airbnb-base": "13.1.0",
-    "eslint-config-prettier": "3.1.0",
+    "eslint-config-prettier": "3.3.0",
     "eslint-plugin-import": "2.14.0",
-    "nodemon": "1.18.4",
-    "prettier": "1.14.3"
+    "nodemon": "1.18.9",
+    "prettier": "1.15.3"
   }
 }
