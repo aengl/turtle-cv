@@ -76,9 +76,9 @@ properties:
           description: Things that you did during your employment that are particularly noteworthy
           items:
             type: object
-            required: [description]
+            required: [summary]
             properties:
-              description:
+              summary:
                 type: string
                 description: Summary of the highlight
               keywords:

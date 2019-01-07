@@ -111,10 +111,10 @@
             "items": {
               "type": "object",
               "required": [
-                "description"
+                "summary"
               ],
               "properties": {
-                "description": {
+                "summary": {
                   "type": "string",
                   "description": "Summary of the highlight"
                 },
