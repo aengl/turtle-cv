@@ -78,19 +78,19 @@ Check out the [schema file](/schema/schema.yml) for all supported attributes.
 You can generate the CV without even cloning this project. It's ancient turtle magic ✨🐢✨! Just run the following in your terminal:
 
 ```
-npx https://github.com/aengl/turtle-cv cv.yml
+npx turtle-cv cv.yml
 ```
 
 Just make sure that your `cv.yml` actually exists. Turtle magic isn't _that_ powerful.
 
-You should now be the proud owner of a `cv.html`. Go and host it on [GitHub pages](https://pages.github.com/) and you're good to go!
+You should now be the proud owner of a `cv.html`. Go and host it on [GitHub Pages](https://pages.github.com/) and you're good to go!
 
 One more useful hint:
 
 Especially when using `npx`, it's very helpful to enable watch mode, which will automatically compile the HTML file whenever you change and save the YAML file.
 
 ```
-npx https://github.com/aengl/turtle-cv cv.yml --watch
+npx turtle-cv cv.yml --watch
 ```
 
 ## Installation
@@ -98,7 +98,7 @@ npx https://github.com/aengl/turtle-cv cv.yml --watch
 If you find yourself using `npx` a lot, it probably makes more sense to install the project. Simply run:
 
 ```
-npm install --global https://github.com/aengl/turtle-cv
+npm install --global turtle-cv
 ```
 
 You can now convert the yml simply by typing:
@@ -106,6 +106,24 @@ You can now convert the yml simply by typing:
 ```
 turtle-cv cv.yml
 ```
+
+If you'd rather not install it globally, you can use this `package.json` to get you started with your CV project:
+
+```
+{
+  "name": "cv",
+  "private": true,
+  "dependencies": {
+    "turtle-cv": "latest"
+  },
+  "scripts": {
+    "build": "turtle-cv cv.yml -o index.html",
+    "dev": "open index.html && turtle-cv cv.yml -o index.html --watch"
+  }
+}
+```
+
+This setup is especially nifty when using a repository that is published via [Github Pages](https://pages.github.com).
 
 ## Themes
 
