@@ -141,11 +141,12 @@ Here is how to set it up in Visual Studio Code:
 
 1.  Install [YAML Support by Red Hat](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml)
 1.  [Open Workspace settings](https://code.visualstudio.com/docs/getstarted/settings)
-1.  Add the `yaml.schemas` key in your settings object:
+1.  Add the following `yaml` configuration in your settings:
 
     ```
     {
       ...
+      "yaml.validate": true,
       "yaml.schemas": {
         "https://aengl.github.io/turtle-cv/schema/schema.json": "/*"
       }
@@ -179,6 +180,19 @@ The usual way to contribute is to fork the project, make changes on your fork an
 But you're also welcome to create an issue in this repository, where you link to your theme.
 
 A note on themes: you are welcome to support attributes in your theme that are not in the schema. You don't have to support everything there is in the schema either, but the subset used in the [example CV](__tests__/cv.yml) needs to be fully supported.
+
+To preview your changes on the example CV, run:
+
+```
+yarn dev __tests__/cv.yml -o __tests__/cv.html
+```
+
+Don't forget to update tests, snapshots and the gallery:
+
+```
+yarn test -u
+yarn create:gallery
+```
 
 ## License
 
