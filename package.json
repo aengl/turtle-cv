@@ -19,14 +19,9 @@
   "engines": {
     "node": ">=10"
   },
-  "scripts": {
-    "start": "node cli.js",
-    "create:gallery": "node gallery/create.js",
-    "create:schema": "node schema/create.js",
-    "dev": "nodemon",
-    "dev:gallery": "nodemon --config gallery/nodemon.json",
-    "dev:schema": "nodemon --config schema/nodemon.json",
-    "test": "ava"
+  "prettier": {
+    "singleQuote": true,
+    "trailingComma": "es5"
   },
   "dependencies": {
     "caporal": "1.1.0",
@@ -43,5 +38,14 @@
     "eslint-plugin-import": "2.16.0",
     "nodemon": "1.18.10",
     "prettier": "1.16.4"
+  },
+  "scripts": {
+    "start": "node cli.js",
+    "create:gallery": "node gallery/create.js",
+    "create:schema": "node schema/create.js",
+    "dev": "nodemon",
+    "dev:gallery": "nodemon --config gallery/nodemon.json",
+    "dev:schema": "nodemon --config schema/nodemon.json",
+    "test": "ava __tests__/*"
   }
 }
