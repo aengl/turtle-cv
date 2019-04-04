@@ -10,20 +10,16 @@
   --weight-bold: 500;
 }
 
-html {
-  display: flex;
-  justify-content: center;
+body {
+  max-width: 800px;
   font-family: 'Merriweather', sans-serif;
   font-size: 20px;
   font-weight: 300;
   line-height: 1.2em;
-  margin: 5vh 10vw;
+  margin: 0 auto;
+  padding: 5vh 10vw;
   background: var(--background);
   color: var(--text-color);
-}
-
-body {
-  max-width: 800px;
 }
 
 hr {
