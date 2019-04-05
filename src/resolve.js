@@ -30,7 +30,7 @@ module.exports = {
     // Figure out the path to the Pug file
     const stats = fs.lstatSync(existingUri);
     if (stats.isDirectory) {
-      return path.resolve(path.join(existingUri, 'theme.pug'));
+      return path.resolve(existingUri);
     }
     return existingUri;
   },

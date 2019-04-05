@@ -4,9 +4,9 @@ const cluster = require('cluster');
 const fs = require('fs');
 const path = require('path');
 const program = require('caporal');
-const packageJson = require('./package.json');
-const { generateHTML, readCV } = require('./src');
-const { resolveTemplate, resolveYML } = require('./src/resolve');
+const packageJson = require('../package.json');
+const { generateHTML, readCV } = require('.');
+const { resolveTemplate, resolveYML } = require('./resolve');
 
 function forkAndWatch(file, logger) {
   if (!fs.existsSync(file)) {
@@ -40,13 +40,13 @@ program
       logger.info(`Reading CV from "${cvPath}"`);
       const cv = readCV(args.yml);
 
-      const templatePath = resolveTemplate(options.template || 'default');
+      const templatePath = resolveTemplate(options.template || 'default.jsx');
       logger.info(`Generating HTML from template at "${templatePath}"`);
       const html = generateHTML(cv, templatePath, options.language);
 
       const outputPath =
         options.output || path.basename(cvPath).replace(/\.[^.]+$/, '.html');
-      logger.info(`Saving HTML at "${outputPath}"`);
+      logger.info(`Saving HTML to "${outputPath}"`);
       fs.writeFileSync(outputPath, html);
     }
   });

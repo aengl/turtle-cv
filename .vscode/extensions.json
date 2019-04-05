@@ -1,7 +1,7 @@
 {
   "recommendations": [
     "alanwalk.markdown-toc",
-    "bierner.markdown-preview-github-styles",
+    "blanu.vscode-styled-jsx",
     "dbaeumer.vscode-eslint",
     "esbenp.prettier-vscode",
     "redhat.vscode-yaml",

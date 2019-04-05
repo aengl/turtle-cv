@@ -1,7 +1,9 @@
+const babel = require('@babel/core');
 const fs = require('fs');
-const pug = require('pug');
+const ReactDOMServer = require('react-dom/server');
 const yaml = require('js-yaml');
-const { markdown } = require('markdown');
+const requireFromString = require('require-from-string');
+const { flushToHTML } = require('styled-jsx/server');
 
 const readFile = filePath => fs.readFileSync(filePath, 'utf8');
 
@@ -19,11 +21,19 @@ module.exports = {
    * @param {string} templatePath Path to a Pug template.
    * @returns {string} The rendered HTML page.
    */
-  generateHTML: (data, templatePath, language = 'en') =>
-    pug.renderFile(templatePath, {
-      ...data,
-      language,
-      markdown: s => markdown.toHTML(s),
-      sections: Object.keys(data), // Remember the order of the sections
-    }),
+  generateHTML: (data, templatePath, language = 'en') => {
+    const { code } = babel.transformFileSync(templatePath, {
+      plugins: ['styled-jsx/babel', '@babel/plugin-transform-modules-commonjs'],
+      presets: ['@babel/preset-react'],
+    });
+    const templateModule = requireFromString(code);
+    const componentString = ReactDOMServer.renderToStaticMarkup(
+      templateModule.default({
+        ...data,
+        language,
+      })
+    );
+    const styles = flushToHTML();
+    return `<!doctype html><html><head>${styles}</head><body>${componentString}</body></html>`;
+  },
 };
