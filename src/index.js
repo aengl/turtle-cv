@@ -44,7 +44,7 @@ const importTemplate = (templatePath, root) => {
  * Recursively searches for template imports and caches their modules.
  */
 const compileTemplateDependencies = (templatePath, root) => {
-  let templateCode = transpile(templatePath);
+  let templateCode = fs.readFileSync(templatePath, 'utf-8');
   const importRegex = /theme:\/\/(?<template>[^'"`]+)/;
   while (true) {
     const match = templateCode.match(importRegex);
@@ -58,14 +58,14 @@ const compileTemplateDependencies = (templatePath, root) => {
       dependencyTemplatePath
     );
   }
-  return templateCode;
+  return transpile(templateCode);
 };
 
 /**
  * Transpiles a template with Babel.
  */
-const transpile = filePath =>
-  babel.transformFileSync(filePath, {
+const transpile = code =>
+  babel.transformSync(code, {
     plugins: ['styled-jsx/babel', '@babel/plugin-transform-modules-commonjs'],
     presets: ['@babel/preset-react'],
   }).code;

@@ -3,9 +3,12 @@ import { Helmet } from 'react-helmet';
 import LocalizedStrings from 'react-localization';
 import ReactMarkdown from 'react-markdown';
 
-exports.default = props => {
+export default props => {
   strings.setLanguage(props.language);
-  // const sections
+  if (props.sections) {
+    // Patch sections with overrides
+    Object.assign(sections, props.sections);
+  }
   return (
     <>
       <Helmet>
@@ -120,7 +123,7 @@ exports.default = props => {
  * Localisation & Helpers
  * ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^ */
 
-const strings = new LocalizedStrings({
+export const strings = new LocalizedStrings({
   en: {
     to: 'to',
     since: 'Since',
@@ -143,7 +146,7 @@ const strings = new LocalizedStrings({
   },
 });
 
-const Duration = ({ from, until }) => (
+export const Duration = ({ from, until }) => (
   <div className="light">
     {until ? `${from} ${strings.to} ${until}` : `${strings.since} ${from}`}
   </div>

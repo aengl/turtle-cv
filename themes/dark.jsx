@@ -1,9 +1,9 @@
 import React from 'react';
-import Theme from 'theme://default';
+import DefaultTheme from 'theme://default';
 
-exports.default = props => (
+export default props => (
   <>
-    <Theme {...props} />
+    <DefaultTheme {...props} />
     <style jsx global>{`
       :root {
         --background: hsl(26, 10%, 11%);
