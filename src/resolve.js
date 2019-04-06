@@ -15,7 +15,7 @@ module.exports = {
    * @param {string} root Paths are resolved relative to the root.
    * @returns {string} Resolved path to the template.
    */
-  resolveTemplate: (name, root) => {
+  resolveTemplate: (name, root = '.') => {
     let uri = name;
 
     // Append extension
@@ -33,12 +33,6 @@ module.exports = {
       .map(x => path.resolve(x))
       .find(x => fs.existsSync(x));
     if (!resolvedPath) {
-      console.warn([
-        uri,
-        path.join(__dirname, '../themes', uri),
-        path.join(root, uri),
-        path.join(root, 'themes', uri),
-      ]);
       throw new Error(`Error: theme not found: "${name}"`);
     }
     return resolvedPath;
