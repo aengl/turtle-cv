@@ -4,5 +4,4 @@
 /node_modules
 /schema
 .DS_store
-.eslintrc.yaml
 nodemon.json

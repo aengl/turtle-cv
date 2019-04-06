@@ -1,5 +1,5 @@
 {
   "watch": ["themes", "gallery"],
-  "ext": "js,pug,css",
+  "ext": "js,jsx",
   "exec": "node gallery/create.js"
 }

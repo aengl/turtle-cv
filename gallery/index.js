@@ -1,5 +1,3 @@
-/* eslint-env browser */
-
 const themes = document.getElementById('themes');
 const preview = document.getElementById('preview');
 

@@ -22,15 +22,15 @@
 
 - **Data-oriented**: All data for your CV should be contained in a [single file](__tests__/cv.yml) that is completely design agnostic, and thus easy to maintain.
 
-- **Extensible**: All design decisions are made by themes, which are [Pug templates](https://github.com/pugjs/pug). You can easily hack an existing theme without even cloning the repository. A theme can be [based on another](themes/dark/theme.pug), simply [adjusting some colors](themes/dark/theme.css). Multiple languages are [supported as well](themes/default/text.pug).
+- **Extensible**: All design decisions are made by themes, which are statically rendered [React](https://reactjs.org/) components. A theme can easily be [based on another](themes/dark.jsx). Multiple languages are [supported as well](themes/default.jsx#L137).
 
-- **Simple**: All you need is your YAML file. The CLI can be used without installation, as long as you have `nodejs` installed.
+- **Simple**: All you need is your YAML file. The CLI can be used without installation, as long as you have `Node.js` installed.
 
 - **Modern**: All themes are responsive and designed for current-gen browsers. `turtle-cv` prefers simple, clean code over browser compatibility.
 
 In short, `turtle-cv` turns this
 
-```
+```yaml
 profile:
   name: Donatello
   label: Ninja Turtle
@@ -57,7 +57,7 @@ You can browse all available themes in the [🌠 Theme Gallery](https://aengl.gi
 
 ## Prerequisites
 
-This project requires a recent version of [Node.js](https://nodejs.org/en/) installed. Everything `>= 8` should work, but only the latest version is tested.
+This project requires a recent version of [Node.js](https://nodejs.org/en/) installed. Everything `>= 10` should work, but only the latest version is tested.
 
 ## Getting Started
 
@@ -67,7 +67,7 @@ The best way to get going is to copy [Donatello's CV YAML](https://github.com/ae
 
 Here's a command to get you started:
 
-```
+```sh
 wget https://raw.githubusercontent.com/aengl/turtle-cv/master/__tests__/cv.yml
 ```
 
@@ -77,7 +77,7 @@ Check out the [schema file](/schema/schema.yml) for all supported attributes.
 
 You can generate the CV without even cloning this project. It's ancient turtle magic ✨🐢✨! Just run the following in your terminal:
 
-```
+```sh
 npx turtle-cv cv.yml
 ```
 
@@ -97,19 +97,19 @@ npx turtle-cv cv.yml --watch
 
 If you find yourself using `npx` a lot, it probably makes more sense to install the project. Simply run:
 
-```
+```sh
 npm install --global turtle-cv
 ```
 
 You can now convert the yml simply by typing:
 
-```
+```sh
 turtle-cv cv.yml
 ```
 
 If you'd rather not install it globally, you can use this `package.json` to get you started with your CV project:
 
-```
+```json
 {
   "name": "cv",
   "private": true,
@@ -127,28 +127,77 @@ This setup is especially nifty when using a repository that is published via [Gi
 
 ## Themes
 
-Themes are [Pug templates](https://github.com/pugjs/pug), usually coupled with a CSS file, and optionally a language file (YAML) for localisation.
+Themes are [React](https://reactjs.org/) components and make heavy use of [JSX](https://reactjs.org/docs/introducing-jsx.html), which gets transpiled by [Babel](https://babeljs.io/) during runtime.
 
 If you just want to use another theme, you can reference it by name using the `-t` option:
 
-```
+```sh
 turtle-cv cv.yml -t dark
 ```
 
 Or using `npx`:
 
-```
+```sh
 npx https://github.com/aengl/turtle-cv cv.yml -t dark
 ```
 
 You can browse all available themes in the [🌠 Theme Gallery](https://aengl.github.io/turtle-cv/gallery).
 
-If you want to write your own theme, or make a simple adjustment to an existing one, the best way to start is to download it from the [themes folder](themes). If the theme extends another theme (the Pug file starts with an `extends` directive) you will have to download that theme as well and put it in a sibling folder.
+If you want to write your own theme, or make a simple adjustment to an existing one, the best way to start is to have a look at the [existing themes](themes). Your theme file can live right next to your CV file and still import parts of existing themes using the `theme://` URI in an `import` ([example](themes/dark.jsx)).
 
 Make a few adjustments and use it by adding a `-t` option like this:
 
-```
+```sh
 turtle-cv cv.yml -t /path/to/my_theme
+```
+
+CSS is coded right into the JSX using [styled-jsx](https://github.com/zeit/styled-jsx), though you can use any other CSS-in-JS of your choice.
+
+If you want to use NPM modules beyond the ones that this project supports, you can create a `package.json` in your theme folder and import dependencies as usual.
+
+When extending themes, the cusomisation options depend on the individual theme. For the default theme, you can easily change colors, fonts and individual section. Here is an example:
+
+```jsx
+import React from 'react';
+import DarkTheme from 'theme://dark';
+
+export default props => (
+  <>
+    <DarkTheme
+      {...props}
+      fonts={{
+        body: {
+          family: 'Dosis',
+          weight: 300,
+          weightBold: 700,
+        },
+        header: {
+          family: 'Indie Flower',
+          weight: 400,
+        },
+      }}
+      sections={{
+        profile: ({ data }) => (
+          <>
+            <h1>{data.name}</h1>
+            <p>Look at my custom profile!</p>
+          </>
+        ),
+      }}
+    />
+    <style jsx global>{`
+      :root {
+        --text-color: hotpink;
+      }
+    `}</style>
+  </>
+);
+```
+
+Just save it as `my-theme.jsx` where your CV YAML sits and try it out with:
+
+```sh
+turtle-cv cv.yml -t my-theme
 ```
 
 ## Schema
@@ -175,11 +224,11 @@ Here is how to set it up in Visual Studio Code:
 
 Want to have a non-English CV? We got you covered!
 
-```
+```sh
 turtle-cv cv.yml -l de
 ```
 
-Well, sort of. Chances are your language isn't supported by the theme yet, but it's pretty easy to [hack it in](themes/default/text.pug).
+Well, sort of. Chances are your language isn't supported by the theme yet, but it's pretty easy to [hack it in](themes/default.jsx#L137).
 
 The language code is specified using [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes).
 
@@ -201,13 +250,13 @@ A note on themes: you are welcome to support attributes in your theme that are n
 
 To preview your changes on the example CV, run:
 
-```
+```sh
 yarn dev __tests__/cv.yml -o __tests__/cv.html
 ```
 
 Don't forget to update tests, snapshots and the gallery:
 
-```
+```sh
 yarn test -u
 yarn create:gallery
 ```

@@ -1,5 +1,5 @@
 {
-  "watch": ["cli.js", "src", "themes", "__tests__"],
-  "ext": "js,yml,pug,css",
-  "exec": "node cli.js"
+  "watch": ["src", "themes", "__tests__"],
+  "ext": "js,jsx,yml",
+  "exec": "node src/cli.js"
 }

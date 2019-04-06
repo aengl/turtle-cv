@@ -4,9 +4,9 @@ const cluster = require('cluster');
 const fs = require('fs');
 const path = require('path');
 const program = require('caporal');
-const packageJson = require('./package.json');
-const { generateHTML, readCV } = require('./src');
-const { resolveTemplate, resolveYML } = require('./src/resolve');
+const packageJson = require('../package.json');
+const { renderTemplate } = require('.');
+const { resolveTemplate, resolveCV } = require('./resolve');
 
 function forkAndWatch(file, logger) {
   if (!fs.existsSync(file)) {
@@ -36,17 +36,19 @@ program
       logger.info('starting in watch mode');
       forkAndWatch(args.yml, logger);
     } else {
-      const cvPath = resolveYML(args.yml, null, '.yml');
-      logger.info(`Reading CV from "${cvPath}"`);
-      const cv = readCV(args.yml);
-
-      const templatePath = resolveTemplate(options.template || 'default');
-      logger.info(`Generating HTML from template at "${templatePath}"`);
-      const html = generateHTML(cv, templatePath, options.language);
+      const cvPath = resolveCV(args.yml);
+      const templatePath = resolveTemplate(
+        options.template || 'default.jsx',
+        path.dirname(cvPath)
+      );
+      logger.info(
+        `Generating HTML from CV at ${cvPath} and template at "${templatePath}"`
+      );
+      const html = renderTemplate(cvPath, templatePath, options.language);
 
       const outputPath =
         options.output || path.basename(cvPath).replace(/\.[^.]+$/, '.html');
-      logger.info(`Saving HTML at "${outputPath}"`);
+      logger.info(`Saving HTML to "${outputPath}"`);
       fs.writeFileSync(outputPath, html);
     }
   });
