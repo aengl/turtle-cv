@@ -1,0 +1,12 @@
+# Jekyll configuration for Github Pages
+
+exclude:
+  - __tests__
+  - .vscode
+  - src
+  - themes
+  - LICENSE
+  - nodemon.json
+  - package.json
+  - README.md
+  - yarn.lock
