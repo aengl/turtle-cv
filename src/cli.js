@@ -6,7 +6,7 @@ const path = require('path');
 const program = require('caporal');
 const packageJson = require('../package.json');
 const { generateHTML, readCV } = require('.');
-const { resolveTemplate, resolveYML } = require('./resolve');
+const { resolveTemplate, resolveCV } = require('./resolve');
 
 function forkAndWatch(file, logger) {
   if (!fs.existsSync(file)) {
@@ -36,9 +36,9 @@ program
       logger.info('starting in watch mode');
       forkAndWatch(args.yml, logger);
     } else {
-      const cvPath = resolveYML(args.yml, null, '.yml');
+      const cvPath = resolveCV(args.yml);
       logger.info(`Reading CV from "${cvPath}"`);
-      const cv = readCV(args.yml);
+      const cv = readCV(cvPath);
 
       const templatePath = resolveTemplate(options.template || 'default.jsx');
       logger.info(`Generating HTML from template at "${templatePath}"`);

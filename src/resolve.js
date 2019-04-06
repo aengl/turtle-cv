@@ -3,35 +3,33 @@ const path = require('path');
 
 module.exports = {
   /**
-   * Resolves the absolute path to a YML file.
-   * @param {string} uri The URI (relative or absolute path) for the YML file.
-   * @returns {string} Resolved path to the YML file.
+   * Resolves the absolute path to a CV file.
+   * @param {string} uri The URI (relative or absolute path) for the CV file.
+   * @returns {string} Resolved path to the CV file.
    */
-  resolveYML: uri => path.resolve(uri),
+  resolveCV: uri => path.resolve(uri),
 
   /**
-   * Resolves the absolute path to a Pug template.
-   * @param {string} uri The URI (relative or absolute path) for the Pug
-   * template.
+   * Resolves the absolute path to a template.
+   * @param {string} name Template name or path.
    * @returns {string} Resolved path to the template.
    */
-  resolveTemplate: uri => {
-    const templateRoot = path.join(__dirname, '../themes');
+  resolveTemplate: name => {
+    let uri = name;
 
-    // Find something that actually exists first
-    let existingUri = uri;
-    if (!fs.existsSync(existingUri)) {
-      existingUri = path.join(templateRoot, uri);
-    }
-    if (!fs.existsSync(existingUri)) {
-      throw new Error(`Error: theme not found: "${uri}"`);
+    // Append extension
+    if (!uri.endsWith('.jsx')) {
+      uri = `${uri}.jsx`;
     }
 
-    // Figure out the path to the Pug file
-    const stats = fs.lstatSync(existingUri);
-    if (stats.isDirectory) {
-      return path.resolve(existingUri);
+    // Resolve path
+    if (!fs.existsSync(uri)) {
+      const templateRoot = path.join(__dirname, '../themes');
+      uri = path.join(templateRoot, uri);
     }
-    return existingUri;
+    if (!fs.existsSync(uri)) {
+      throw new Error(`Error: theme not found: "${name}"`);
+    }
+    return path.resolve(uri);
   },
 };

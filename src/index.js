@@ -6,20 +6,18 @@ const requireFromString = require('require-from-string');
 const { flushToHTML } = require('styled-jsx/server');
 const { Helmet } = require('react-helmet');
 
-const readFile = filePath => fs.readFileSync(filePath, 'utf8');
-
 module.exports = {
   /**
-   * Reads CV data from YAML.
-   * @param {string} cv Contents of the CV YAML file.
+   * Reads CV data from a YAML file.
+   * @param {string} cvPath Path to the CV YAML file.
    * @returns {object} CV data object.
    */
-  readCV: cv => yaml.load(readFile(cv)),
+  readCV: cvPath => yaml.load(fs.readFileSync(cvPath, 'utf8')),
 
   /**
    * Generates an HTML file from a template and a CV data object.
    * @param {object} data CV data that will be passed into the template.
-   * @param {string} templatePath Path to a Pug template.
+   * @param {string} templatePath Path to a template.
    * @returns {string} The rendered HTML page.
    */
   generateHTML: (data, templatePath, language = 'en') => {
