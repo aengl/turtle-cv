@@ -5,7 +5,7 @@ const fs = require('fs');
 const path = require('path');
 const program = require('caporal');
 const packageJson = require('../package.json');
-const { generateHTML, readCV } = require('.');
+const { renderTemplate } = require('.');
 const { resolveTemplate, resolveCV } = require('./resolve');
 
 function forkAndWatch(file, logger) {
@@ -44,7 +44,7 @@ program
       logger.info(
         `Generating HTML from CV at ${cvPath} and template at "${templatePath}"`
       );
-      const html = generateHTML(cvPath, templatePath, options.language);
+      const html = renderTemplate(cvPath, templatePath, options.language);
 
       const outputPath =
         options.output || path.basename(cvPath).replace(/\.[^.]+$/, '.html');

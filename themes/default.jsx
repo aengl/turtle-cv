@@ -3,16 +3,14 @@ import { Helmet } from 'react-helmet';
 import LocalizedStrings from 'react-localization';
 import ReactMarkdown from 'react-markdown';
 
-export default props => {
-  strings.setLanguage(props.language);
-  if (props.sections) {
-    // Patch sections with overrides
-    Object.assign(sections, props.sections);
-  }
+export default ({ cv, language, sections = {} }) => {
+  strings.setLanguage(language);
+  const mergedSections = Object.assign({}, defaultSections, sections);
   return (
     <>
       <Helmet>
-        <title>{props.profile.name}</title>
+        <html lang={language} />
+        <title>{cv.profile.name}</title>
         <link
           rel="stylesheet"
           href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
@@ -23,10 +21,13 @@ export default props => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Helmet>
       <main>
-        <Profile {...props.profile} social={props.social} />
-        {Object.keys(props).map(key =>
-          sections[key]
-            ? React.createElement(sections[key], { key, data: props[key] })
+        {Object.keys(cv).map(key =>
+          mergedSections[key]
+            ? React.createElement(mergedSections[key], {
+                cv,
+                data: cv[key],
+                key,
+              })
             : null
         )}
       </main>
@@ -37,14 +38,14 @@ export default props => {
         :root {
           --background: white;
           --text-color: hsl(0, 0%, 15%);
-          --theme-color: hsl(26, 100%, 50%);
           --light-color: hsl(0, 0%, 60%);
+          --theme-color: hsl(26, 100%, 50%);
           --anchor-color: hsl(26, 100%, 25%);
+          --keyword-color: hsl(0, 0%, 30%);
+          --keyword-background: hsl(0, 0%, 92%);
           --small: 0.8em;
           --large: 1.2em;
           --bold: 700;
-          --keyword-color: hsl(0, 0%, 30%);
-          --keyword-background: hsl(0, 0%, 92%);
         }
         body {
           max-width: 800px;
@@ -120,7 +121,7 @@ export default props => {
 };
 
 /* ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^
- * Localisation & Helpers
+ * Localisation
  * ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^ */
 
 export const strings = new LocalizedStrings({
@@ -146,96 +147,100 @@ export const strings = new LocalizedStrings({
   },
 });
 
+/* ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^
+ * Sections
+ * ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^ */
+
 export const Duration = ({ from, until }) => (
   <div className="light">
     {until ? `${from} ${strings.to} ${until}` : `${strings.since} ${from}`}
   </div>
 );
 
-/* ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^
- * Profile
- * ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^ */
+export const defaultSections = {
+  /* ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^
+   * Profile
+   * ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^ */
 
-export const Profile = props => (
-  <section>
-    <h1>{props.name}</h1>
-    {props.label && <div className="label">{props.label}</div>}
-    <ul className="details">
-      {props.email && (
-        <li>
-          <i className="fa fa-envelope" />
-          <a href={props.email}>{props.email}</a>
-        </li>
+  profile: ({ cv, data }) => (
+    <section>
+      <h1>{data.name}</h1>
+      {data.label && <div className="label">{data.label}</div>}
+      <ul className="details">
+        {data.email && (
+          <li>
+            <i className="fa fa-envelope" />
+            <a href={data.email}>{data.email}</a>
+          </li>
+        )}
+        {data.website && (
+          <li>
+            <i className="fa fa-globe" />
+            <a href={data.website}>{data.website}</a>
+          </li>
+        )}
+        {data.location && (
+          <li>
+            <i className="fa fa-home" />
+            {data.location}
+          </li>
+        )}
+        {cv.social && (
+          <div className="social">
+            {cv.social.map(({ network, url }) => (
+              <a key={network} href={url}>
+                <i className={`fab fa-${network.toLowerCase()}`} />
+              </a>
+            ))}
+          </div>
+        )}
+      </ul>
+      {data.summary && (
+        <>
+          <hr />
+          <div className="summary">
+            <ReactMarkdown>{data.summary}</ReactMarkdown>
+          </div>
+          <hr />
+        </>
       )}
-      {props.website && (
-        <li>
-          <i className="fa fa-globe" />
-          <a href={props.website}>{props.website}</a>
-        </li>
-      )}
-      {props.location && (
-        <li>
-          <i className="fa fa-home" />
-          {props.location}
-        </li>
-      )}
-      {props.social && (
-        <div className="social">
-          {props.social.map(({ network, url }) => (
-            <a key={network} href={url}>
-              <i className={`fab fa-${network.toLowerCase()}`} />
-            </a>
-          ))}
-        </div>
-      )}
-    </ul>
-    {props.summary && (
-      <>
-        <hr />
-        <div className="summary">
-          <ReactMarkdown>{props.summary}</ReactMarkdown>
-        </div>
-        <hr />
-      </>
-    )}
-    <style jsx>{`
-      .label {
-        margin: 0.2em 0;
-        text-transform: uppercase;
-        color: var(--light-color);
-      }
-      .summary {
-        text-align: justify;
-        margin: 2.2em 0;
-      }
-      .details {
-        margin: 1.8em 0;
-        list-style: none;
-        padding: 0;
-      }
-      .details li {
-        margin: 0.2em;
-      }
-      .social {
-        margin: 1.2rem 0;
-        font-size: 3em;
-      }
-      .social i {
-        color: var(--light-color);
-        transition: all 0.4s ease;
-      }
-      .social i:hover {
-        color: var(--theme-color);
-        transform: scale(1.2);
-      }
-    `}</style>
-  </section>
-);
+      <style jsx>{`
+        .label {
+          margin: 0.2em 0;
+          text-transform: uppercase;
+          color: var(--light-color);
+        }
+        .summary {
+          text-align: justify;
+          margin: 2.2em 0;
+        }
+        .details {
+          margin: 1.8em 0;
+          list-style: none;
+          padding: 0;
+        }
+        .details li {
+          margin: 0.2em;
+        }
+        .social {
+          margin: 1.2rem 0;
+          font-size: 3em;
+        }
+        .social i {
+          color: var(--light-color);
+          transition: all 0.4s ease;
+        }
+        .social i:hover {
+          color: var(--theme-color);
+          transform: scale(1.2);
+        }
+      `}</style>
+    </section>
+  ),
 
-export const sections = {
-  /* ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^
+  /* ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^
    * Work
-   * ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^ */
+   * ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^ */
 
   work: ({ data }) => (
     <section>
@@ -296,9 +301,9 @@ export const sections = {
     </section>
   ),
 
-  /* ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^
+  /* ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^
    * Education
-   * ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^ */
+   * ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^ */
 
   education: ({ data }) => (
     <section>
@@ -327,9 +332,9 @@ export const sections = {
     </section>
   ),
 
-  /* ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^
+  /* ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^
    * Awards
-   * ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^ */
+   * ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^ */
 
   awards: ({ data }) => (
     <section>
@@ -354,9 +359,9 @@ export const sections = {
     </section>
   ),
 
-  /* ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^
+  /* ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^
    * Publications
-   * ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^ */
+   * ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^ */
 
   publications: ({ data }) => (
     <section>
@@ -380,9 +385,9 @@ export const sections = {
     </section>
   ),
 
-  /* ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^
+  /* ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^
    * Skills
-   * ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^ */
+   * ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^ */
 
   skills: ({ data }) => (
     <section>
@@ -408,9 +413,9 @@ export const sections = {
     </section>
   ),
 
-  /* ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^
+  /* ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^
    * Languages
-   * ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^ */
+   * ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^ */
 
   languages: ({ data }) => (
     <section>

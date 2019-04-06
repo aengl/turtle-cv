@@ -2,7 +2,7 @@ const Ajv = require('ajv');
 const test = require('ava');
 const fs = require('fs');
 const yaml = require('js-yaml');
-const { generateHTML } = require('../src');
+const { renderTemplate } = require('../src');
 const { resolveTemplate, resolveCV } = require('../src/resolve');
 const siteSchema = require('../schema/schema.json');
 
@@ -26,11 +26,11 @@ fs.readdirSync('../themes')
   .forEach(theme =>
     test(`correctly applies theme "${theme}"`, t => {
       const template = resolveTemplate(theme);
-      t.snapshot(generateHTML(cvPath, template));
+      t.snapshot(renderTemplate(cvPath, template));
     })
   );
 
 test(`can use another language`, t => {
   const template = resolveTemplate('default');
-  t.snapshot(generateHTML(cvPath, template, 'de'));
+  t.snapshot(renderTemplate(cvPath, template, 'de'));
 });
