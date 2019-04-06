@@ -17,11 +17,15 @@ exports.default = props => (
     </Helmet>
     <main>
       <Profile {...props.profile} social={props.social} />
-      {props.work && <Work items={props.work} />}
+      {Object.keys(props).map(key =>
+        sections[key]
+          ? React.createElement(sections[key], { key, data: props[key] })
+          : null
+      )}
     </main>
 
     <style jsx global>{`
-      @import url('https://fonts.googleapis.com/css?family=Exo+2:200|Merriweather:300,500');
+      @import url('https://fonts.googleapis.com/css?family=Exo+2:200|Merriweather:300,700');
 
       :root {
         --background: white;
@@ -29,10 +33,10 @@ exports.default = props => (
         --theme-color: hsl(26, 100%, 50%);
         --light-color: #999;
         --anchor-color: hsl(26, 100%, 25%);
-        --font-size-small: 0.8em;
-        --weight-bold: 500;
+        --small: 0.8em;
+        --large: 1.2em;
+        --bold: 700;
       }
-
       body {
         max-width: 800px;
         font-family: 'Merriweather', sans-serif;
@@ -44,7 +48,6 @@ exports.default = props => (
         background: var(--background);
         color: var(--text-color);
       }
-
       hr {
         border: 0;
         height: 0;
@@ -52,11 +55,9 @@ exports.default = props => (
         border-bottom: 1px solid rgba(255, 255, 255, 0.3);
         margin: 1.2em 0;
       }
-
       i {
         margin-right: 0.4em;
       }
-
       h1 {
         margin: 0.4em 0;
         font-size: 3em;
@@ -73,7 +74,6 @@ exports.default = props => (
         font-family: 'Exo 2', sans-serif;
         line-height: 1.1em;
       }
-
       a {
         text-decoration: none;
         color: var(--anchor-color);
@@ -81,21 +81,43 @@ exports.default = props => (
       a:hover {
         color: var(--theme-color);
       }
-
       p {
         margin: 0.5em 0;
       }
-
       ul {
         padding-left: 25px;
         margin: 0.4em 0;
         list-style-type: disc;
       }
+      li {
+        margin: 0.2em 0;
+      }
+      section > ul {
+        list-style: none;
+        padding: 0;
+      }
+      section > ul > li {
+        margin-bottom: 2.5em;
+      }
+      .light {
+        color: var(--light-color);
+      }
+      .large {
+        font-size: var(--large);
+      }
     `}</style>
   </>
 );
 
-const Profile = props => (
+const Duration = ({ from, until }) => (
+  <div className="light">{until ? `${from} to ${until}` : `Since ${from}`}</div>
+);
+
+/* ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^
+ * Profile
+ * ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^ */
+
+export const Profile = props => (
   <section>
     <h1>{props.name}</h1>
     {props.label && <div className="label">{props.label}</div>}
@@ -115,7 +137,7 @@ const Profile = props => (
       {props.location && (
         <li>
           <i className="fa fa-home" />
-          <span>{props.location}</span>
+          {props.location}
         </li>
       )}
       {props.social && (
@@ -171,84 +193,200 @@ const Profile = props => (
   </section>
 );
 
-const Date = ({ from, until }) => (
-  <div className="date">
-    {until ? `${from} to ${until}` : `Since ${from}`}
-    <style jsx>{`
-      .date {
-        color: var(--light-color);
-      }
-    `}</style>
-  </div>
-);
+export const sections = {
+  /* ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^
+   * Work
+   * ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^ */
 
-const Work = ({ items }) => (
-  <section className="work">
-    <h2>
-      <i className="fa fa-suitcase" />
-      Work History
-    </h2>
-    <ul>
-      {items.map((props, i) => (
-        <li key={i} className="work-item">
-          <p>
-            <Date from={props.from} until={props.until} />
-          </p>
-          {props.company && (
+  work: ({ data }) => (
+    <section>
+      <h2>
+        <i className="fa fa-suitcase" />
+        Work History
+      </h2>
+      <ul>
+        {data.map((props, i) => (
+          <li key={i}>
             <p>
-              <a href={props.url}>{props.company}</a>
+              <Duration from={props.from} until={props.until} />
             </p>
-          )}
-          {props.position && (
+            {props.company && (
+              <p>
+                <a href={props.url} className="large">
+                  {props.company}
+                </a>
+              </p>
+            )}
+            {props.position && <p>Position: {props.position}</p>}
+            {props.summary && <ReactMarkdown>{props.summary}</ReactMarkdown>}
+            {props.highlights && (
+              <ul>
+                {props.highlights.map((item, i) => (
+                  <li key={i}>
+                    <ReactMarkdown>{item.summary}</ReactMarkdown>
+                    {item.keywords && (
+                      <ul className="keywords">
+                        {item.keywords.map(x => (
+                          <li key={x}>{x}</li>
+                        ))}
+                      </ul>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </li>
+        ))}
+      </ul>
+      <style jsx>{`
+        ul.keywords {
+          list-style: none;
+          margin: 0.3em 0 0.8em;
+          padding: 0;
+        }
+        ul.keywords > li {
+          display: inline;
+          color: hsl(0, 0%, 30%);
+          background-color: hsl(0, 0%, 92%);
+          border-radius: 5px;
+          margin: 0.2em;
+          padding: 0.3em 0.7em;
+          font-size: var(--small);
+        }
+      `}</style>
+    </section>
+  ),
+
+  /* ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^
+   * Education
+   * ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^ */
+
+  education: ({ data }) => (
+    <section>
+      <h2>
+        <i className="fa fa-graduation-cap" />
+        Education
+      </h2>
+      <ul>
+        {data.map((props, i) => (
+          <li key={i}>
             <p>
-              Position: <span>{props.position}</span>
+              <Duration from={props.from} until={props.until} />
             </p>
-          )}
-          {props.summary && <ReactMarkdown>{props.summary}</ReactMarkdown>}
-          {props.highlights && (
-            <ul>
-              {props.highlights.map((item, i) => (
-                <li key={i}>
-                  <ReactMarkdown>{item.summary}</ReactMarkdown>
-                  {item.keywords && (
-                    <ul className="keywords">
-                      {item.keywords.map(x => (
-                        <li key={x}>{x}</li>
-                      ))}
-                    </ul>
-                  )}
-                </li>
-              ))}
-            </ul>
-          )}
-        </li>
-      ))}
-    </ul>
-    <style jsx>{`
-      .work > ul {
-        list-style: none;
-        padding: 0;
-      }
-      .work-item {
-        margin: 0 0 3em;
-      }
-      ul.keywords {
-        list-style: none;
-        margin: 0.3em 0 0.8em;
-        padding: 0;
-      }
-      ul.keywords > li {
-        display: inline;
-        color: hsl(0, 0%, 30%);
-        background-color: hsl(0, 0%, 92%);
-        border-radius: 5px;
-        margin: 0.2em;
-        padding: 0.3em 0.7em;
-        font-size: var(--font-size-small);
-      }
-      .highlights {
-        margin: 0.4em 0 0 0;
-      }
-    `}</style>
-  </section>
-);
+            {props.institution && (
+              <p>
+                <a href={props.url} className="large">
+                  {props.institution}
+                </a>
+              </p>
+            )}
+            {props.area && <p>{props.area}</p>}
+            {props.degree && <p>Degree: {props.degree}</p>}
+          </li>
+        ))}
+      </ul>
+    </section>
+  ),
+
+  /* ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^
+   * Awards
+   * ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^ */
+
+  awards: ({ data }) => (
+    <section>
+      <h2>
+        <i className="fa fa-medal" />
+        Awards
+      </h2>
+      <ul>
+        {data.map((props, i) => (
+          <li key={i}>
+            {props.date && <p className="light">{props.date}</p>}
+            <p>
+              <a href={props.url} className="large">
+                {props.name}
+              </a>
+            </p>
+            {props.arwarder && <p>Arwarded by: {props.arwarder}</p>}
+            {props.summary && <ReactMarkdown>{props.summary}</ReactMarkdown>}
+          </li>
+        ))}
+      </ul>
+    </section>
+  ),
+
+  /* ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^
+   * Publications
+   * ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^ */
+
+  publications: ({ data }) => (
+    <section>
+      <h2>
+        <i className="fa fa-pen-fancy" />
+        Publications
+      </h2>
+      <ul>
+        {data.map((props, i) => (
+          <li key={i}>
+            {props.date && <p className="light">{props.date}</p>}
+            <p>
+              <a href={props.url} className="large">
+                {props.title}
+              </a>
+            </p>
+            {props.summary && <ReactMarkdown>{props.summary}</ReactMarkdown>}
+          </li>
+        ))}
+      </ul>
+    </section>
+  ),
+
+  /* ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^
+   * Skills
+   * ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^ */
+
+  skills: ({ data }) => (
+    <section>
+      <h2>
+        <i className="fa fa-toolbox" />
+        Skills
+      </h2>
+      <ul>
+        {data.map((props, i) => (
+          <li key={i}>
+            <p>{props.name}</p>
+            {props.level && <p className="light">{props.level}</p>}
+            {props.keywords && (
+              <ul className="keywords">
+                {props.keywords.map(keyword => (
+                  <li key={keyword}>{keyword}</li>
+                ))}
+              </ul>
+            )}
+          </li>
+        ))}
+      </ul>
+    </section>
+  ),
+
+  /* ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^
+   * Languages
+   * ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^ */
+
+  languages: ({ data }) => (
+    <section>
+      <h2>
+        <i className="fa fa-comments" />
+        Languages
+      </h2>
+      <ul>
+        {data.map((props, i) => (
+          <li key={i}>
+            <p>{props.name}</p>
+            {props.level && <p className="light">{props.level}</p>}
+          </li>
+        ))}
+      </ul>
+    </section>
+  ),
+};
