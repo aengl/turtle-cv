@@ -31,11 +31,13 @@ exports.default = props => (
         --background: white;
         --text-color: hsl(0, 0%, 15%);
         --theme-color: hsl(26, 100%, 50%);
-        --light-color: #999;
+        --light-color: hsl(0, 0%, 60%);
         --anchor-color: hsl(26, 100%, 25%);
         --small: 0.8em;
         --large: 1.2em;
         --bold: 700;
+        --keyword-color: hsl(0, 0%, 30%);
+        --keyword-background: hsl(0, 0%, 92%);
       }
       body {
         max-width: 800px;
@@ -246,8 +248,8 @@ export const sections = {
         }
         ul.keywords > li {
           display: inline;
-          color: hsl(0, 0%, 30%);
-          background-color: hsl(0, 0%, 92%);
+          color: var(--keyword-color);
+          background-color: var(--keyword-background);
           border-radius: 5px;
           margin: 0.2em;
           padding: 0.3em 0.7em;
