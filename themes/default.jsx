@@ -25,20 +25,20 @@ exports.default = props => (
 
       :root {
         --background: white;
-        --text-color: black;
+        --text-color: hsl(0, 0%, 15%);
         --theme-color: hsl(26, 100%, 50%);
         --light-color: #999;
         --anchor-color: hsl(26, 100%, 25%);
-        --small-font: 0.8em;
+        --font-size-small: 0.8em;
         --weight-bold: 500;
       }
 
       body {
         max-width: 800px;
         font-family: 'Merriweather', sans-serif;
-        font-size: 20px;
+        font-size: 16px;
         font-weight: 300;
-        line-height: 1.2em;
+        line-height: 1.4em;
         margin: 0 auto;
         padding: 5vh 10vw;
         background: var(--background);
@@ -59,11 +59,11 @@ exports.default = props => (
 
       h1 {
         margin: 0.4em 0;
-        font-size: 2.4em;
+        font-size: 3em;
       }
       h2 {
         margin: 2em 0 1.2em;
-        font-size: 1.6em;
+        font-size: 2em;
       }
       h1,
       h2 {
@@ -89,9 +89,7 @@ exports.default = props => (
       ul {
         padding-left: 25px;
         margin: 0.4em 0;
-      }
-      li p {
-        margin: 0;
+        list-style-type: disc;
       }
     `}</style>
   </>
@@ -131,11 +129,13 @@ const Profile = props => (
       )}
     </ul>
     {props.summary && (
-      <div className="summary">
+      <>
         <hr />
-        <ReactMarkdown source={props.summary} />
+        <div className="summary">
+          <ReactMarkdown>{props.summary}</ReactMarkdown>
+        </div>
         <hr />
-      </div>
+      </>
     )}
     <style jsx>{`
       .label {
@@ -146,11 +146,9 @@ const Profile = props => (
       .summary {
         text-align: justify;
         margin: 2.2em 0;
-        font-size: var(--small-font);
       }
       .details {
         margin: 1.8em 0;
-        font-size: var(--small-font);
         list-style: none;
         padding: 0;
       }
@@ -173,22 +171,66 @@ const Profile = props => (
   </section>
 );
 
+const Date = ({ from, until }) => (
+  <div className="date">
+    {until ? `${from} to ${until}` : `Since ${from}`}
+    <style jsx>{`
+      .date {
+        color: var(--light-color);
+      }
+    `}</style>
+  </div>
+);
+
 const Work = ({ items }) => (
   <section className="work">
+    <h2>
+      <i className="fa fa-suitcase" />
+      Work History
+    </h2>
     <ul>
       {items.map((props, i) => (
-        <li key={i}>
-          {props.company && <a href={props.url}>{props.company}</a>}
+        <li key={i} className="work-item">
+          <p>
+            <Date from={props.from} until={props.until} />
+          </p>
+          {props.company && (
+            <p>
+              <a href={props.url}>{props.company}</a>
+            </p>
+          )}
+          {props.position && (
+            <p>
+              Position: <span>{props.position}</span>
+            </p>
+          )}
+          {props.summary && <ReactMarkdown>{props.summary}</ReactMarkdown>}
+          {props.highlights && (
+            <ul>
+              {props.highlights.map((item, i) => (
+                <li key={i}>
+                  <ReactMarkdown>{item.summary}</ReactMarkdown>
+                  {item.keywords && (
+                    <ul className="keywords">
+                      {item.keywords.map(x => (
+                        <li key={x}>{x}</li>
+                      ))}
+                    </ul>
+                  )}
+                </li>
+              ))}
+            </ul>
+          )}
         </li>
       ))}
     </ul>
     <style jsx>{`
-      .highlights {
-        margin: 0.4em 0 0 0;
-      }
-      ul {
+      .work > ul {
         list-style: none;
         padding: 0;
+      }
+      .work-item {
+        margin: 0 0 3em;
       }
       ul.keywords {
         list-style: none;
@@ -202,7 +244,10 @@ const Work = ({ items }) => (
         border-radius: 5px;
         margin: 0.2em;
         padding: 0.3em 0.7em;
-        font-size: 0.8em;
+        font-size: var(--font-size-small);
+      }
+      .highlights {
+        margin: 0.4em 0 0 0;
       }
     `}</style>
   </section>
