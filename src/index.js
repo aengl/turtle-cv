@@ -1,32 +1,26 @@
-const babel = require('@babel/core');
 const fs = require('fs');
-const ReactDOMServer = require('react-dom/server');
-const yaml = require('js-yaml');
-const { flushToHTML } = require('styled-jsx/server');
-const { Helmet } = require('react-helmet');
-const { resolveTemplate } = require('./resolve');
-const Module = require('module');
 const path = require('path');
+const Module = require('module');
+const babel = require('@babel/core');
+const yaml = require('js-yaml');
+const ReactDOMServer = require('react-dom/server');
+const { Helmet } = require('react-helmet');
+const { flushToHTML } = require('styled-jsx/server');
+const { resolveTemplate } = require('./resolve');
 
 module.exports = {
-  /**
-   * Reads CV data from a YAML file.
-   * @param {string} cvPath Path to the CV YAML file.
-   * @returns {object} CV data object.
-   */
-  readCV: cvPath => yaml.load(fs.readFileSync(cvPath, 'utf8')),
-
   /**
    * Generates an HTML file from a template and a CV data object.
    * @param {object} data CV data that will be passed into the template.
    * @param {string} templatePath Path to a template.
    * @returns {string} The rendered HTML page.
    */
-  generateHTML: (data, templatePath, language = 'en') => {
-    const templateModule = importTemplate(templatePath);
+  generateHTML: (cvPath, templatePath, language = 'en') => {
+    const cv = yaml.load(fs.readFileSync(cvPath, 'utf8'));
+    const templateModule = importTemplate(templatePath, cvPath);
     const renteredTemplate = ReactDOMServer.renderToStaticMarkup(
       templateModule.default({
-        ...data,
+        ...cv,
         language,
       })
     );
@@ -41,15 +35,15 @@ module.exports = {
  * Like NodeJs' `require`, but transpiles the template module and its
  * dependencies on-the-fly.
  */
-const importTemplate = templatePath => {
-  const templateCode = compileTemplateDependencies(templatePath);
+const importTemplate = (templatePath, root) => {
+  const templateCode = compileTemplateDependencies(templatePath, root);
   return compileModule(templateCode, templatePath).exports;
 };
 
 /**
  * Recursively searches for template imports and caches their modules.
  */
-const compileTemplateDependencies = templatePath => {
+const compileTemplateDependencies = (templatePath, root) => {
   let templateCode = transpile(templatePath);
   const importRegex = /theme:\/\/(?<template>[^'"`]+)/;
   while (true) {
@@ -57,13 +51,12 @@ const compileTemplateDependencies = templatePath => {
     if (!match) {
       break;
     }
-    const dependencyTemplatePath = resolveTemplate(match.groups.template);
-    templateCode = templateCode.replace(importRegex, './$1.jsx');
+    const dependencyTemplatePath = resolveTemplate(match.groups.template, root);
+    templateCode = templateCode.replace(importRegex, dependencyTemplatePath);
     require.cache[dependencyTemplatePath] = compileModule(
-      transpile(dependencyTemplatePath),
+      compileTemplateDependencies(dependencyTemplatePath, root),
       dependencyTemplatePath
     );
-    compileTemplateDependencies(dependencyTemplatePath);
   }
   return templateCode;
 };
@@ -81,7 +74,10 @@ const transpile = filePath =>
  * Compiles a module.
  */
 const compileModule = (code, filename) => {
-  const paths = Module._nodeModulePaths(path.dirname(filename));
+  const paths = [
+    path.resolve(__dirname, '../node_modules'),
+    ...Module._nodeModulePaths(filename),
+  ];
   const m = new Module(filename, module.parent);
   m.filename = filename;
   m.paths = paths;

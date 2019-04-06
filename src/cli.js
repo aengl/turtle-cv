@@ -37,12 +37,14 @@ program
       forkAndWatch(args.yml, logger);
     } else {
       const cvPath = resolveCV(args.yml);
-      logger.info(`Reading CV from "${cvPath}"`);
-      const cv = readCV(cvPath);
-
-      const templatePath = resolveTemplate(options.template || 'default.jsx');
-      logger.info(`Generating HTML from template at "${templatePath}"`);
-      const html = generateHTML(cv, templatePath, options.language);
+      const templatePath = resolveTemplate(
+        options.template || 'default.jsx',
+        path.dirname(cvPath)
+      );
+      logger.info(
+        `Generating HTML from CV at ${cvPath} and template at "${templatePath}"`
+      );
+      const html = generateHTML(cvPath, templatePath, options.language);
 
       const outputPath =
         options.output || path.basename(cvPath).replace(/\.[^.]+$/, '.html');

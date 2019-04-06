@@ -12,9 +12,10 @@ module.exports = {
   /**
    * Resolves the absolute path to a template.
    * @param {string} name Template name or path.
+   * @param {string} root Paths are resolved relative to the root.
    * @returns {string} Resolved path to the template.
    */
-  resolveTemplate: name => {
+  resolveTemplate: (name, root) => {
     let uri = name;
 
     // Append extension
@@ -23,13 +24,23 @@ module.exports = {
     }
 
     // Resolve path
-    if (!fs.existsSync(uri)) {
-      const templateRoot = path.join(__dirname, '../themes');
-      uri = path.join(templateRoot, uri);
-    }
-    if (!fs.existsSync(uri)) {
+    const resolvedPath = [
+      uri,
+      path.join(__dirname, '../themes', uri),
+      path.join(root, uri),
+      path.join(root, 'themes', uri),
+    ]
+      .map(x => path.resolve(x))
+      .find(x => fs.existsSync(x));
+    if (!resolvedPath) {
+      console.warn([
+        uri,
+        path.join(__dirname, '../themes', uri),
+        path.join(root, uri),
+        path.join(root, 'themes', uri),
+      ]);
       throw new Error(`Error: theme not found: "${name}"`);
     }
-    return path.resolve(uri);
+    return resolvedPath;
   },
 };
