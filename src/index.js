@@ -4,6 +4,7 @@ const ReactDOMServer = require('react-dom/server');
 const yaml = require('js-yaml');
 const requireFromString = require('require-from-string');
 const { flushToHTML } = require('styled-jsx/server');
+const { Helmet } = require('react-helmet');
 
 const readFile = filePath => fs.readFileSync(filePath, 'utf8');
 
@@ -34,6 +35,8 @@ module.exports = {
       })
     );
     const styles = flushToHTML();
-    return `<!doctype html><html><head>${styles}</head><body>${componentString}</body></html>`;
+    const helmet = Helmet.renderStatic();
+    const head = `<head>${helmet.title.toString()}${helmet.meta.toString()}${helmet.link.toString()}${styles}</head>`;
+    return `<!doctype html><html lang="${language}" ${helmet.htmlAttributes.toString()}>${head}<body>${componentString}</body></html>`;
   },
 };
