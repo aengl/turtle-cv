@@ -3,7 +3,22 @@ import { Helmet } from 'react-helmet';
 import LocalizedStrings from 'react-localization';
 import ReactMarkdown from 'react-markdown';
 
-export default ({ cv, language, sections = {} }) => {
+export default ({
+  cv,
+  fonts = {
+    body: {
+      family: 'Merriweather',
+      weight: 300,
+      weightBold: 700,
+    },
+    header: {
+      family: 'Exo 2',
+      weight: 200,
+    },
+  },
+  language,
+  sections = {},
+}) => {
   strings.setLanguage(language);
   const mergedSections = Object.assign({}, defaultSections, sections);
   return (
@@ -33,7 +48,7 @@ export default ({ cv, language, sections = {} }) => {
       </main>
 
       <style jsx global>{`
-        @import url('https://fonts.googleapis.com/css?family=Exo+2:200|Merriweather:300,700');
+        @import url('${createFontImportString(fonts)}');
 
         :root {
           --background: white;
@@ -45,11 +60,11 @@ export default ({ cv, language, sections = {} }) => {
           --keyword-background: hsl(0, 0%, 92%);
           --small: 0.8em;
           --large: 1.2em;
-          --bold: 700;
+          --bold: ${fonts.body.weightBold};
         }
         body {
           max-width: 800px;
-          font-family: 'Merriweather', sans-serif;
+          font-family: '${fonts.body.family}', sans-serif;
           font-size: 16px;
           font-weight: 300;
           line-height: 1.4em;
@@ -81,7 +96,7 @@ export default ({ cv, language, sections = {} }) => {
           color: var(--theme-color);
           text-transform: uppercase;
           font-weight: 200;
-          font-family: 'Exo 2', sans-serif;
+          font-family: '${fonts.header.family}', sans-serif;
           line-height: 1.1em;
         }
         a {
@@ -434,3 +449,15 @@ export const defaultSections = {
     </section>
   ),
 };
+
+/* ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^
+ * Helpers
+ * ~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^ */
+
+const createFontImportString = fonts =>
+  `https://fonts.googleapis.com/css?family=${fonts.body.family.replace(
+    ' ',
+    '+'
+  )}:${fonts.body.weight || 400},${fonts.body.weightBold ||
+    700}|${fonts.header.family.replace(' ', '+')}:${fonts.header.weight ||
+    400}`;

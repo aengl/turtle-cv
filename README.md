@@ -22,7 +22,7 @@
 
 - **Data-oriented**: All data for your CV should be contained in a [single file](__tests__/cv.yml) that is completely design agnostic, and thus easy to maintain.
 
-- **Extensible**: All design decisions are made by themes, which are statically rendered [React](https://reactjs.org/) components. A theme can easily be [based on another](themes/dark.jsx). Multiple languages are [supported as well](themes/default.jsx#L122).
+- **Extensible**: All design decisions are made by themes, which are statically rendered [React](https://reactjs.org/) components. A theme can easily be [based on another](themes/dark.jsx). Multiple languages are [supported as well](themes/default.jsx#L137).
 
 - **Simple**: All you need is your YAML file. The CLI can be used without installation, as long as you have `Node.js` installed.
 
@@ -30,7 +30,7 @@
 
 In short, `turtle-cv` turns this
 
-```
+```yaml
 profile:
   name: Donatello
   label: Ninja Turtle
@@ -67,7 +67,7 @@ The best way to get going is to copy [Donatello's CV YAML](https://github.com/ae
 
 Here's a command to get you started:
 
-```
+```sh
 wget https://raw.githubusercontent.com/aengl/turtle-cv/master/__tests__/cv.yml
 ```
 
@@ -77,7 +77,7 @@ Check out the [schema file](/schema/schema.yml) for all supported attributes.
 
 You can generate the CV without even cloning this project. It's ancient turtle magic ✨🐢✨! Just run the following in your terminal:
 
-```
+```sh
 npx turtle-cv cv.yml
 ```
 
@@ -97,19 +97,19 @@ npx turtle-cv cv.yml --watch
 
 If you find yourself using `npx` a lot, it probably makes more sense to install the project. Simply run:
 
-```
+```sh
 npm install --global turtle-cv
 ```
 
 You can now convert the yml simply by typing:
 
-```
+```sh
 turtle-cv cv.yml
 ```
 
 If you'd rather not install it globally, you can use this `package.json` to get you started with your CV project:
 
-```
+```json
 {
   "name": "cv",
   "private": true,
@@ -131,13 +131,13 @@ Themes are [React](https://reactjs.org/) components and make heavy use of [JSX](
 
 If you just want to use another theme, you can reference it by name using the `-t` option:
 
-```
+```sh
 turtle-cv cv.yml -t dark
 ```
 
 Or using `npx`:
 
-```
+```sh
 npx https://github.com/aengl/turtle-cv cv.yml -t dark
 ```
 
@@ -147,13 +147,58 @@ If you want to write your own theme, or make a simple adjustment to an existing 
 
 Make a few adjustments and use it by adding a `-t` option like this:
 
-```
+```sh
 turtle-cv cv.yml -t /path/to/my_theme
 ```
 
 CSS is coded right into the JSX using [styled-jsx](https://github.com/zeit/styled-jsx), though you can use any other CSS-in-JS of your choice.
 
 If you want to use NPM modules beyond the ones that this project supports, you can create a `package.json` in your theme folder and import dependencies as usual.
+
+When extending themes, the cusomisation options depend on the individual theme. For the default theme, you can easily change colors, fonts and individual section. Here is an example:
+
+```jsx
+import React from 'react';
+import DarkTheme from 'theme://dark';
+
+export default props => (
+  <>
+    <DarkTheme
+      {...props}
+      fonts={{
+        body: {
+          family: 'Dosis',
+          weight: 300,
+          weightBold: 700,
+        },
+        header: {
+          family: 'Indie Flower',
+          weight: 400,
+        },
+      }}
+      sections={{
+        profile: ({ data }) => (
+          <>
+            <h1>{data.name}</h1>
+            <p>Look at my custom profile!</p>
+          </>
+        ),
+      }}
+    />
+    <style jsx global>{`
+      :root {
+        --text-color: hotpink;
+      }
+    `}</style>
+  </>
+);
+```
+
+Just save it as `my-theme.jsx` where your CV YAML sits and try it out with:
+
+```sh
+turtle-cv cv.yml -t my-theme
+```
 
 ## Schema
 
@@ -179,11 +224,11 @@ Here is how to set it up in Visual Studio Code:
 
 Want to have a non-English CV? We got you covered!
 
-```
+```sh
 turtle-cv cv.yml -l de
 ```
 
-Well, sort of. Chances are your language isn't supported by the theme yet, but it's pretty easy to [hack it in](themes/default.jsx#L122).
+Well, sort of. Chances are your language isn't supported by the theme yet, but it's pretty easy to [hack it in](themes/default.jsx#L137).
 
 The language code is specified using [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes).
 
@@ -205,13 +250,13 @@ A note on themes: you are welcome to support attributes in your theme that are n
 
 To preview your changes on the example CV, run:
 
-```
+```sh
 yarn dev __tests__/cv.yml -o __tests__/cv.html
 ```
 
 Don't forget to update tests, snapshots and the gallery:
 
-```
+```sh
 yarn test -u
 yarn create:gallery
 ```
