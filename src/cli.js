@@ -46,8 +46,9 @@ program
       );
       const html = renderTemplate(cvPath, templatePath, options.language);
 
-      const outputPath =
-        options.output || path.basename(cvPath).replace(/\.[^.]+$/, '.html');
+      const outputPath = path.resolve(
+        options.output || path.basename(cvPath).replace(/\.[^.]+$/, '.html')
+      );
       logger.info(`Saving HTML to "${outputPath}"`);
       fs.writeFileSync(outputPath, html);
     }
