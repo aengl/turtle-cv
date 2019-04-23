@@ -130,6 +130,20 @@ export default ({
         .large {
           font-size: var(--large);
         }
+        @page {
+          margin: 2cm;
+        }
+        @media print {
+          html {
+            font-size: 0.4cm;
+          }
+          body {
+            reset: max-width;
+          }
+          section, li {
+            page-break-inside: avoid;
+          }
+        }
       `}</style>
     </>
   );
@@ -248,6 +262,11 @@ export const defaultSections = {
         .social i:hover {
           color: var(--theme-color);
           transform: scale(1.2);
+        }
+        @media print {
+          .social {
+            display: none;
+          }
         }
       `}</style>
     </section>
