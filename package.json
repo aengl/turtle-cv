@@ -50,6 +50,6 @@
     "dev": "nodemon",
     "dev:gallery": "nodemon --config gallery/nodemon.json",
     "dev:schema": "nodemon --config schema/nodemon.json",
-    "test": "ava __tests__/*"
+    "test": "ava"
   }
 }
