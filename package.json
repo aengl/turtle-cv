@@ -24,22 +24,22 @@
     "trailingComma": "es5"
   },
   "dependencies": {
-    "@babel/core": "7.4.5",
-    "@babel/plugin-transform-modules-commonjs": "7.4.4",
+    "@babel/core": "7.5.4",
+    "@babel/plugin-transform-modules-commonjs": "7.5.0",
     "@babel/preset-react": "7.0.0",
     "caporal": "1.2.0",
     "js-yaml": "3.13.1",
     "react": "16.8.6",
     "react-dom": "16.8.6",
     "react-helmet": "5.2.1",
-    "react-localization": "1.0.13",
+    "react-localization": "1.0.14",
     "react-markdown": "4.1.0",
     "require-from-string": "2.0.2",
     "styled-jsx": "3.2.1"
   },
   "devDependencies": {
-    "ajv": "6.10.0",
-    "ava": "2.1.0",
+    "ajv": "6.10.1",
+    "ava": "2.2.0",
     "nodemon": "1.19.1",
     "prettier": "1.18.2"
   },
