@@ -35,6 +35,7 @@ export default ({
         <meta name="charset" content="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Helmet>
+
       <main>
         {Object.keys(cv).map(key =>
           mergedSections[key]
