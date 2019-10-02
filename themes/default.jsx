@@ -200,7 +200,7 @@ export const defaultSections = {
         {data.email && (
           <li>
             <i className="fa fa-envelope" />
-            <a href={data.email}>{data.email}</a>
+            <a href={`mailto:${data.email}`}>{data.email}</a>
           </li>
         )}
         {data.website && (
