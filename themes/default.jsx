@@ -29,8 +29,6 @@ export default ({
         <link
           rel="stylesheet"
           href="https://use.fontawesome.com/releases/v5.13.0/css/all.css"
-          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
-          crossorigin="anonymous"
         />
         <meta name="charset" content="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
