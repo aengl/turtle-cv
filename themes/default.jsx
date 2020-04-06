@@ -28,7 +28,7 @@ export default ({
         <title>{cv.profile.name}</title>
         <link
           rel="stylesheet"
-          href="https://use.fontawesome.com/releases/v5.11.2/css/all.css"
+          href="https://use.fontawesome.com/releases/v5.13.0/css/all.css"
           integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
           crossorigin="anonymous"
         />
@@ -478,6 +478,6 @@ const createFontImportString = fonts =>
   `https://fonts.googleapis.com/css?family=${fonts.body.family.replace(
     ' ',
     '+'
-  )}:${fonts.body.weight || 400},${fonts.body.weightBold ||
-    700}|${fonts.header.family.replace(' ', '+')}:${fonts.header.weight ||
-    400}`;
+  )}:${fonts.body.weight || 400},${
+    fonts.body.weightBold || 700
+  }|${fonts.header.family.replace(' ', '+')}:${fonts.header.weight || 400}`;
